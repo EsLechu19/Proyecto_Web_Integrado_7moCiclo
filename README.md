@@ -367,9 +367,9 @@ Proyecto desarrollado para el curso de **Desarrollo Web Integrado** de la carrer
 
 # 👨‍💻 Autores
 
-**Esaú Lechuga Monge**
-**Jose Lavado Yañez**
-**Josué Olivera Llantoy**
+* Esaú Lechuga Monge
+* Jose Lavado Yañez
+* Josué Olivera Llantoy
 
 Estudiantes de Ingeniería de Software
 
