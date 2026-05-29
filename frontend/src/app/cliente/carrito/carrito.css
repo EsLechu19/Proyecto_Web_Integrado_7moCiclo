@@ -1,0 +1,186 @@
+.cart-card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 25px;
+
+  margin-bottom: 25px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+
+}
+
+.cart-image {
+
+  width: 120px;
+
+  height: 120px;
+
+  object-fit: cover;
+
+  border-radius: 18px;
+
+}
+
+.cart-total {
+
+  margin-top: 40px;
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 30px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+
+}
+
+@media(max-width: 1199px) {
+  .cart-card {
+    padding: 20px;
+  }
+
+  .cart-card img[width="140"] {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+
+@media(max-width: 991px) {
+  .cart-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .cart-card img[width="140"] {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .cart-card .flex-grow-1 {
+    width: 100%;
+  }
+
+  .cart-total {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media(max-width: 576px) {
+  .container.py-5 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  h1.fw-bold {
+    font-size: 1.5rem;
+  }
+
+  .cart-card {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .cart-card img[width="140"] {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .cart-card h5 {
+    font-size: 0.95rem;
+  }
+
+  .qty-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .card.border-0.shadow.rounded-4.p-4 {
+    padding: 20px !important;
+  }
+
+  .input-group .form-control,
+  .input-group .btn {
+    font-size: 0.85rem;
+  }
+}
+
+@media(max-width: 380px) {
+  .cart-card img[width="140"] {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .cart-card .btn-outline-danger.btn-sm {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+}
+.qty-btn{
+
+  width: 34px;
+
+  height: 34px;
+
+  border-radius: 50%;
+
+  border: 1px solid #d1d5db;
+
+  background: white;
+
+  font-weight: bold;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition: 0.2s;
+
+}
+
+.qty-btn:hover{
+
+  background: #111827;
+
+  color: white;
+
+  border-color: #111827;
+
+}
+
+.success-icon {
+  animation: successPop 0.5s ease forwards;
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,372 @@
+<div class="d-flex">
+
+  <app-sidebar></app-sidebar>
+
+  <div class="flex-grow-1 p-5">
+
+    <div class="d-flex justify-content-between mb-4">
+
+      <h1 class="fw-bold">
+        Productos
+      </h1>
+
+      <button class="btn btn-dark rounded-pill" (click)="abrirModal()">
+        Nuevo producto
+      </button>
+
+    </div>
+
+    <div class="table-responsive bg-white p-4 rounded-4 shadow-sm">
+
+      <table class="table align-middle">
+
+        <thead>
+
+          <tr>
+
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Tallas</th>
+            <th>Stock Total</th>
+            <th>Acciones</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let producto of productos">
+
+            <td>{{ producto.idProducto }}</td>
+
+            <td>{{ producto.nombre }}</td>
+
+            <td>S/. {{ producto.precio }}</td>
+
+            <td>
+              <span class="badge bg-light text-dark border me-1" *ngFor="let t of (producto.tallas || []).slice(0, 4)">
+                {{ t.talla }}
+              </span>
+              <span *ngIf="producto.tallas?.length > 4" class="badge bg-light text-muted border">+{{ producto.tallas.length - 4 }}</span>
+              <small class="text-muted d-block" *ngIf="!producto.tallas?.length">—</small>
+            </td>
+
+            <td>{{ stockTotal(producto) }}</td>
+
+            <td class="d-flex gap-2">
+
+              <button class="btn btn-primary btn-sm" (click)="verProducto(producto)">
+                Ver
+              </button>
+
+              <button class="btn btn-warning btn-sm" (click)="abrirModal(producto)">
+                Editar
+              </button>
+
+              <button class="btn btn-danger btn-sm" (click)="eliminarProducto(producto.idProducto)">
+                Eliminar
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal fade" id="productoModal" tabindex="-1">
+
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h5 class="modal-title">
+
+          {{
+          productoSeleccionado.idProducto
+          ? 'Editar Producto'
+          : 'Nuevo Producto'
+          }}
+
+        </h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row g-3">
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Nombre
+            </label>
+
+            <input type="text" class="form-control" [(ngModel)]="productoSeleccionado.nombre">
+
+          </div>
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Precio
+            </label>
+
+            <input type="number" class="form-control" [(ngModel)]="productoSeleccionado.precio">
+
+          </div>
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Color
+            </label>
+
+            <input type="text" class="form-control" [(ngModel)]="productoSeleccionado.color">
+
+          </div>
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Género
+            </label>
+
+            <select class="form-select" [(ngModel)]="productoSeleccionado.genero">
+              <option value="HOMBRE">Hombre</option>
+              <option value="MUJER">Mujer</option>
+              <option value="UNISEX">Unisex</option>
+            </select>
+
+          </div>
+
+          <div class="col-12">
+
+            <label class="form-label fw-bold">
+              Tallas y Stock
+            </label>
+
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered mb-2">
+                <thead class="table-light">
+                  <tr>
+                    <th style="width:45%">Talla</th>
+                    <th style="width:35%">Stock</th>
+                    <th style="width:20%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let t of productoSeleccionado.tallas; let i = index">
+                    <td>
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="t.talla" placeholder="Ej: S, M, L, 38, 40">
+                    </td>
+                    <td>
+                      <input type="number" class="form-control form-control-sm" [(ngModel)]="t.stock" min="0">
+                    </td>
+                    <td class="text-center">
+                      <button class="btn btn-outline-danger btn-sm" (click)="eliminarTalla(i)">
+                        <i class="bi bi-x"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <button class="btn btn-outline-dark btn-sm rounded-pill" (click)="agregarTalla()">
+              <i class="bi bi-plus"></i> Agregar talla
+            </button>
+
+          </div>
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Imagen principal URL
+            </label>
+
+            <input type="text" class="form-control" [(ngModel)]="productoSeleccionado.imagenUrl">
+
+          </div>
+
+          <div class="col-md-6">
+
+            <label class="form-label">
+              Categoría
+            </label>
+
+            <select class="form-select" [(ngModel)]="productoSeleccionado.categoria.idCategoria">
+
+              <option *ngFor="let cat of categorias" [value]="cat.idCategoria">
+                {{ cat.nombre }}
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="col-12">
+
+            <label class="form-label fw-bold">
+              Imágenes del producto
+            </label>
+
+            <p class="text-muted small mb-2">La primera imagen es la principal (se muestra en catálogo, carrito, etc.)</p>
+
+            <div class="d-flex flex-column gap-2 mb-2">
+              <div class="input-group input-group-sm" *ngFor="let url of imagenUrls; let i = index">
+                <span class="input-group-text" *ngIf="i === 0" title="Imagen principal">
+                  <i class="bi bi-star-fill text-warning"></i>
+                </span>
+                <span class="input-group-text" *ngIf="i > 0">{{ i + 1 }}</span>
+                <input type="text" class="form-control" [(ngModel)]="imagenUrls[i]" [placeholder]="i === 0 ? 'URL de imagen principal' : 'URL de imagen adicional'">
+                <button class="btn btn-outline-danger" (click)="eliminarImagen(i)">
+                  <i class="bi bi-x"></i>
+                </button>
+              </div>
+            </div>
+
+            <button class="btn btn-outline-dark btn-sm rounded-pill" (click)="agregarImagen()">
+              <i class="bi bi-plus"></i> Agregar imagen
+            </button>
+
+            <div class="d-flex flex-wrap gap-2 mt-2" *ngIf="imagenUrls.length > 0">
+              <img *ngFor="let url of imagenUrls" [src]="url"
+                   class="rounded border" style="width:60px;height:60px;object-fit:cover;">
+            </div>
+
+          </div>
+
+          <div class="col-12">
+
+            <label class="form-label">
+              Descripción
+            </label>
+
+            <textarea class="form-control" rows="4" [(ngModel)]="productoSeleccionado.descripcion"></textarea>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+
+        <button class="btn btn-dark" (click)="guardarProducto()">
+          Guardar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="modal fade" id="verProductoModal" tabindex="-1">
+
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h5 class="modal-title">
+          Detalle Producto
+        </h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row">
+
+          <div class="col-md-5">
+
+            <img [src]="productoSeleccionado.imagenUrl" class="img-fluid rounded">
+
+            <div class="d-flex flex-wrap gap-1 mt-2" *ngIf="obtenerArrayImagenes(productoSeleccionado.imagenes).length > 1">
+              <img *ngFor="let url of obtenerArrayImagenes(productoSeleccionado.imagenes)" [src]="url"
+                   class="rounded border" style="width:50px;height:50px;object-fit:cover;cursor:pointer"
+                   (click)="productoSeleccionado.imagenUrl = url">
+            </div>
+
+          </div>
+
+          <div class="col-md-7">
+
+            <h3 class="fw-bold">
+              {{ productoSeleccionado.nombre }}
+            </h3>
+
+            <p class="text-muted">
+              {{ productoSeleccionado.descripcion }}
+            </p>
+
+            <hr>
+
+            <p>
+              <strong>Precio:</strong>
+              S/. {{ productoSeleccionado.precio }}
+            </p>
+
+            <p>
+              <strong>Stock por talla:</strong>
+            </p>
+            <ul>
+              <li *ngFor="let t of productoSeleccionado.tallas">
+                {{ t.talla }}: {{ t.stock }} und.
+              </li>
+            </ul>
+            <p *ngIf="!productoSeleccionado.tallas?.length">
+              <em class="text-muted">Sin tallas configuradas</em>
+            </p>
+
+            <p>
+              <strong>Color:</strong>
+              {{ productoSeleccionado.color }}
+            </p>
+
+            <p>
+              <strong>Género:</strong>
+              {{ productoSeleccionado.genero }}
+            </p>
+
+            <p>
+              <strong>Categoría:</strong>
+              {{ productoSeleccionado.categoria?.nombre }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

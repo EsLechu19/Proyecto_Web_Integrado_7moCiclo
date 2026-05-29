@@ -1,0 +1,198 @@
+.history-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1px solid #f1f3f5;
+  transition: all 0.25s ease;
+}
+
+.history-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  border-color: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.history-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.history-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid #f1f3f5;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.status-badge i {
+  font-size: 0.9rem;
+}
+
+.status-badge.PENDIENTE {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.EN_PROCESO {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.ENVIADO {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.status-badge.ENTREGADO {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.CANCELADO {
+  background: #fce4ec;
+  color: #c62828;
+}
+
+.btn-detalle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  background: #0f172a;
+  color: white;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-detalle:hover {
+  background: #1e3a8a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15,23,42,0.2);
+}
+
+.btn-cancelar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1.5px solid #fca5a5;
+  background: transparent;
+  color: #dc2626;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-cancelar:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  transform: translateY(-1px);
+}
+
+.detalle-productos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.detalle-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background: #f8fafc;
+  border-radius: 14px;
+  transition: all 0.2s;
+}
+
+.detalle-item:hover {
+  background: #f1f5f9;
+}
+
+.detalle-img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.detalle-info {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.detalle-info .fw-bold {
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detalle-meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.detalle-meta .badge {
+  font-weight: 500;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+}
+
+.detalle-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  margin-top: 8px;
+  border-top: 2px solid #e2e8f0;
+}
+
+@media(max-width: 576px) {
+  .history-card-top {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .history-card-bottom {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .detalle-item {
+    flex-wrap: wrap;
+  }
+
+  .detalle-item .fw-bold.text-primary {
+    width: 100%;
+    text-align: right;
+  }
+}

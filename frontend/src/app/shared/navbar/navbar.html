@@ -1,0 +1,338 @@
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar shadow-sm sticky-top">
+
+  <div class="container">
+
+    <!-- LOGO -->
+
+    <a class="navbar-brand fw-bold fs-3" routerLink="/home">
+
+      StyloStore
+
+    </a>
+
+    <!-- MOBILE -->
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+      <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <!-- NAVBAR -->
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- LINKS -->
+
+      <ul class="navbar-nav mx-auto gap-2 text-center">
+
+        <li class="nav-item">
+
+          <a class="nav-link" routerLink="/home">
+
+            Inicio
+
+          </a>
+
+        </li>
+
+        <li class="nav-item">
+
+          <a class="nav-link" routerLink="/productos">
+
+            Catálogo
+
+          </a>
+
+        </li>
+
+        <!-- HOMBRE DROPDOWN -->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button">
+
+            Hombre
+
+          </a>
+
+          <ul class="dropdown-menu">
+
+            <li *ngFor="let cat of categorias">
+
+              <a class="dropdown-item" [routerLink]="['/productos']" [queryParams]="{genero: 'HOMBRE', categoria: cat.idCategoria}">
+
+                {{ cat.nombre }}
+
+              </a>
+
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+
+              <a class="dropdown-item" [routerLink]="['/productos']" [queryParams]="{genero: 'HOMBRE'}">
+
+                Ver todo
+
+              </a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <!-- MUJER DROPDOWN -->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button">
+
+            Mujer
+
+          </a>
+
+          <ul class="dropdown-menu">
+
+            <li *ngFor="let cat of categorias">
+
+              <a class="dropdown-item" [routerLink]="['/productos']" [queryParams]="{genero: 'MUJER', categoria: cat.idCategoria}">
+
+                {{ cat.nombre }}
+
+              </a>
+
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+
+              <a class="dropdown-item" [routerLink]="['/productos']" [queryParams]="{genero: 'MUJER'}">
+
+                Ver todo
+
+              </a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <!-- ZAPATILLAS -->
+
+        <li class="nav-item">
+
+          <a class="nav-link" [routerLink]="['/productos']" [queryParams]="{categoria: 2}">
+
+            Zapatillas
+
+          </a>
+
+        </li>
+
+      </ul>
+
+      <!-- RIGHT -->
+
+      <div class="d-flex align-items-center gap-3">
+
+        <!-- CARRITO -->
+
+        <button class="cart-btn" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+
+          <i class="bi bi-cart3"></i>
+
+          <span class="cart-badge">
+
+            {{ cantidadCarrito }}
+
+          </span>
+
+        </button>
+
+        <!-- SIN LOGIN -->
+
+        <div class="d-flex gap-2" *ngIf="!authService.isLoggedIn()">
+
+          <button class="btn btn-light rounded-pill px-4 fw-bold" data-bs-toggle="offcanvas"
+            data-bs-target="#loginSidebar">
+
+            Login
+
+          </button>
+
+        </div>
+
+        <!-- CON LOGIN -->
+
+        <div *ngIf="authService.isLoggedIn()">
+
+          <a routerLink="/cliente" class="user-profile">
+
+            <div class="user-avatar">
+
+              {{ authService.getUserName()?.charAt(0) || 'U' }}
+
+            </div>
+
+            <div class="d-flex flex-column text-start">
+
+              <small class="welcome-text">
+
+                Bienvenido
+
+              </small>
+
+              <span class="user-name">
+
+                {{ authService.getUserName() || 'Usuario' }}
+
+              </span>
+
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</nav>
+
+<!-- OFFCANVAS CARRITO -->
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar">
+
+  <div class="offcanvas-header border-bottom">
+
+    <h5 class="fw-bold mb-0">
+
+      🛒 Mi carrito
+
+    </h5>
+
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+
+  </div>
+
+  <div class="offcanvas-body">
+
+    <!-- VACÍO -->
+
+    <div *ngIf="carrito.length === 0" class="text-center py-5">
+
+      <i class="bi bi-cart-x fs-1 text-muted"></i>
+
+      <p class="mt-3 text-muted">
+
+        Tu carrito está vacío
+
+      </p>
+
+    </div>
+
+    <!-- ITEMS -->
+
+    <div *ngFor="let item of carrito" class="cart-item">
+
+      <!-- IMAGEN -->
+
+      <img [src]="item.producto.imagenUrl" class="cart-image">
+
+      <!-- INFO -->
+
+      <div class="flex-grow-1">
+
+        <h6 class="fw-bold mb-1">
+
+          {{ item.producto.nombre }}
+
+        </h6>
+
+        <p class="text-muted small mb-1">
+          S/. {{ item.producto.precio?.toFixed(2) ?? '0.00' }}
+        </p>
+
+        <p class="text-muted small mb-1" *ngIf="item.talla">
+          Talla: <strong>{{ item.talla }}</strong>
+        </p>
+
+        <p class="text-muted small mb-2">
+          Stock: {{ stockTalla(item) }}
+        </p>
+
+        <!-- CONTROLES -->
+
+        <div class="d-flex align-items-center gap-2">
+
+          <button class="qty-btn" (click)="disminuirCantidad(item)">
+
+            -
+
+          </button>
+
+          <span class="fw-bold">
+
+            {{ item.cantidad }}
+
+          </span>
+
+          <button class="qty-btn" [disabled]="item.cantidad >= stockTalla(item)" (click)="aumentarCantidad(item)">
+
+            +
+
+          </button>
+
+          <!-- ELIMINAR -->
+
+          <button class="btn btn-sm text-danger p-0 ms-2" (click)="eliminarItem(item)">
+
+            <i class="bi bi-trash fs-5"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div *ngIf="carrito.length > 0" class="cart-footer">
+
+      <div class="d-flex justify-content-between mb-3">
+
+        <strong>
+
+          Subtotal
+
+        </strong>
+
+        <strong class="text-primary">
+
+          S/. {{ total.toFixed(2) }}
+
+        </strong>
+
+      </div>
+
+      <button class="btn btn-dark w-100 rounded-pill py-3 fw-bold" routerLink="/carrito" (click)="irCarrito()">
+
+        Ir al carrito
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

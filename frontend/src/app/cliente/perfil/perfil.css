@@ -1,0 +1,91 @@
+.profile-card {
+
+  max-width: 700px;
+
+  margin: auto;
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 50px;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+
+}
+
+.profile-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 25px;
+
+}
+
+.profile-avatar {
+
+  width: 90px;
+
+  height: 90px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(to right, #0f172a, #1e40af);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: white;
+
+  font-size: 2rem;
+
+}
+
+.custom-input {
+  height: 55px;
+  border-radius: 14px;
+  border: 1px solid #dbe2ea;
+}
+
+@media (max-width: 767px) {
+  .profile-card {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .profile-avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 1.5rem;
+  }
+
+  .profile-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .custom-input {
+    height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 20px 16px;
+  }
+
+  .btn-dark.rounded-pill {
+    width: 100%;
+  }
+}
+

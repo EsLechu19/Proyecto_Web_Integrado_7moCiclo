@@ -1,0 +1,123 @@
+<section class="container py-5">
+
+  <app-spinner *ngIf="cargando" texto="Cargando producto..."></app-spinner>
+
+  <div class="row g-5" *ngIf="!cargando && producto">
+
+    <div class="col-lg-7">
+
+      <div class="gallery-container">
+        <div class="position-relative">
+          <img
+            [src]="imagenActual"
+            class="img-fluid rounded-4 shadow w-100"
+            [alt]="producto.nombre"
+            style="object-fit: cover; min-height: 400px; max-height: 600px;"
+          >
+          <span class="badge bg-dark position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
+            {{ producto.categoria?.nombre }}
+          </span>
+          <span class="badge bg-secondary position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill">
+            {{ producto.genero }}
+          </span>
+        </div>
+        <div class="thumbnails-row" *ngIf="obtenerArrayImagenes(producto.imagenes).length > 1">
+          <img
+            *ngFor="let url of obtenerArrayImagenes(producto.imagenes); let i = index"
+            [src]="url"
+            [class.active]="imagenActual === url"
+            class="thumbnail-img"
+            (click)="seleccionarImagen(url)"
+          >
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-5">
+
+      <div class="sticky-top" style="top: 100px;">
+
+        <h1 class="fw-bold display-6 mb-2">{{ producto.nombre }}</h1>
+
+        <h2 class="text-primary fw-bold display-5 mb-3">S/. {{ producto.precio?.toFixed(2) }}</h2>
+
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <span class="text-muted"><i class="bi bi-palette me-1"></i> Color: <strong>{{ producto.color }}</strong></span>
+        </div>
+
+        <p class="text-muted mb-4 lead">
+          {{ producto.descripcion || 'Sin descripción' }}
+        </p>
+
+        <!-- SELECTOR DE TALLAS -->
+        <div class="mb-4">
+          <h6 class="fw-bold mb-3">Selecciona tu talla</h6>
+          <div class="d-flex flex-wrap gap-2" *ngIf="producto.tallas && producto.tallas.length > 0">
+            <button
+              *ngFor="let t of producto.tallas"
+              class="btn rounded-3 px-4 py-2 fw-bold talla-btn"
+              [class.btn-dark]="tallaSeleccionada === t.talla && t.stock > 0"
+              [class.btn-outline-dark]="tallaSeleccionada !== t.talla && t.stock > 0"
+              [class.talla-agotada]="t.stock <= 0"
+              [disabled]="t.stock <= 0"
+              (click)="seleccionarTalla(t.talla)"
+            >
+              {{ t.talla }}
+              <span *ngIf="t.stock <= 0" class="talla-x">
+                <i class="bi bi-x-lg"></i>
+              </span>
+            </button>
+          </div>
+          <div *ngIf="!producto.tallas || producto.tallas.length === 0">
+            <p class="text-muted">Producto sin tallas configuradas</p>
+          </div>
+        </div>
+
+        <!-- CANTIDAD -->
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <h6 class="fw-bold mb-0">Cantidad:</h6>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-outline-dark rounded-start-pill px-3" (click)="cantidad = cantidad > 1 ? cantidad - 1 : 1">
+              -
+            </button>
+            <span class="px-4 fw-bold fs-5">{{ cantidad }}</span>
+            <button class="btn btn-outline-dark rounded-end-pill px-3" (click)="aumentarCantidad()">
+              +
+            </button>
+          </div>
+        </div>
+
+        <div class="d-flex gap-3 flex-wrap">
+          <button
+            class="btn btn-dark btn-lg rounded-pill px-5 flex-grow-1"
+            (click)="agregarAlCarrito()"
+            [disabled]="!tallaDisponible()"
+          >
+            <i class="bi bi-cart-plus me-2"></i>
+            {{ tallaDisponible() ? 'Agregar al carrito' : 'Sin stock' }}
+          </button>
+
+          <a routerLink="/productos" class="btn btn-outline-dark btn-lg rounded-pill px-4">
+            <i class="bi bi-arrow-left me-1"></i>
+            Seguir
+          </a>
+        </div>
+
+        <!-- STOCK INFO -->
+        <div class="mt-4 p-3 bg-light rounded-3">
+          <div class="d-flex justify-content-between text-muted small">
+            <span><i class="bi bi-box me-1"></i> Stock total: {{ stockTotal(producto) }}</span>
+            <span *ngIf="tallaSeleccionada">
+              <i class="bi bi-check-circle me-1"></i> Talla seleccionada: <strong>{{ tallaSeleccionada }}</strong>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

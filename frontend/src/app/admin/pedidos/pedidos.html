@@ -1,0 +1,211 @@
+<div class="d-flex">
+
+  <app-sidebar></app-sidebar>
+
+  <div class="flex-grow-1 p-5">
+
+    <h1 class="fw-bold mb-4">
+      Pedidos
+    </h1>
+
+    <div class="bg-white p-4 rounded-4 shadow-sm">
+
+      <app-spinner *ngIf="cargando" texto="Cargando pedidos..."></app-spinner>
+
+      <table class="table table-hover" *ngIf="!cargando">
+
+        <thead>
+
+          <tr>
+
+            <th>#</th>
+            <th>Cliente</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Acción</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let pedido of pedidos">
+
+            <td>{{ pedido.idPedido }}</td>
+
+            <td>{{ pedido.usuario?.nombre || '—' }}</td>
+
+            <td>S/. {{ pedido.total?.toFixed(2) }}</td>
+
+            <td>
+              <span
+                class="badge rounded-pill"
+                [class.bg-warning]="pedido.estado === 'PENDIENTE'"
+                [class.bg-info]="pedido.estado === 'EN_PROCESO'"
+                [class.bg-primary]="pedido.estado === 'ENVIADO'"
+                [class.bg-success]="pedido.estado === 'ENTREGADO'"
+                [class.bg-danger]="pedido.estado === 'CANCELADO'"
+              >
+                {{ pedido.estado }}
+              </span>
+            </td>
+
+            <td>{{ pedido.fechaPedido | date:'short' }}</td>
+
+            <td>
+              <button
+                class="btn btn-sm btn-outline-dark rounded-pill"
+                (click)="abrirDetalle(pedido)"
+              >
+                <i class="bi bi-eye"></i>
+                Detalle
+              </button>
+            </td>
+
+          </tr>
+
+          <tr *ngIf="pedidos.length === 0">
+
+            <td colspan="6" class="text-center text-muted py-4">
+              No hay pedidos registrados
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- MODAL DETALLE PEDIDO -->
+
+<div class="modal fade" id="detallePedidoModal" tabindex="-1">
+
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h5 class="fw-bold">
+          Pedido #{{ pedidoSeleccionado?.idPedido }}
+        </h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="mb-3">
+
+          <strong>Cliente:</strong> {{ pedidoSeleccionado?.usuario?.nombre || '—' }}
+
+        </div>
+
+        <div class="mb-3">
+
+          <strong>Email:</strong> {{ pedidoSeleccionado?.usuario?.correo || '—' }}
+
+        </div>
+
+        <div class="mb-3">
+
+          <strong>Total:</strong> S/. {{ pedidoSeleccionado?.total?.toFixed(2) }}
+
+        </div>
+
+        <div class="mb-3">
+
+          <strong>Fecha:</strong> {{ pedidoSeleccionado?.fechaPedido | date:'medium' }}
+
+        </div>
+
+        <!-- ESTADO -->
+
+        <div class="mb-4">
+
+          <label class="fw-bold mb-2">Estado del pedido:</label>
+
+          <div class="d-flex gap-2">
+
+            <select
+              class="form-select w-auto"
+              [(ngModel)]="nuevoEstado"
+            >
+
+              <option *ngFor="let est of estados" [value]="est">
+                {{ est }}
+              </option>
+
+            </select>
+
+            <button
+              class="btn btn-dark rounded-pill px-4"
+              (click)="actualizarEstado()"
+            >
+              Actualizar
+            </button>
+
+          </div>
+
+        </div>
+
+        <hr>
+
+        <h6 class="fw-bold mb-3">Productos</h6>
+
+        <table class="table table-sm">
+
+          <thead>
+
+            <tr>
+
+              <th>Producto</th>
+              <th>Talla</th>
+              <th>Cantidad</th>
+              <th>Precio Unit.</th>
+              <th>Subtotal</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let item of detallePedido">
+
+              <td>{{ item.producto?.nombre || '—' }}</td>
+              <td>{{ item.talla || '—' }}</td>
+              <td>{{ item.cantidad }}</td>
+              <td>S/. {{ item.precioUnitario?.toFixed(2) }}</td>
+              <td>S/. {{ item.subtotal?.toFixed(2) }}</td>
+
+            </tr>
+
+            <tr *ngIf="detallePedido.length === 0">
+
+              <td colspan="5" class="text-center text-muted py-3">
+                Cargando detalle...
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

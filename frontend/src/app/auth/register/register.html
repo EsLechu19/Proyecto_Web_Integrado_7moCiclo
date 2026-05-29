@@ -1,0 +1,99 @@
+<div
+  class="offcanvas offcanvas-end"
+  tabindex="-1"
+  id="registerSidebar"
+>
+
+  <div class="offcanvas-header login-header">
+
+    <div>
+      <div class="login-icon-circle">
+        <i class="bi bi-person-plus"></i>
+      </div>
+      <h4 class="fw-bold mb-1 text-white">
+        Crear Cuenta
+      </h4>
+      <p class="text-white-50 small mb-0">Regístrate y obtén beneficios exclusivos</p>
+    </div>
+
+    <button
+      type="button"
+      class="btn-close btn-close-white"
+      data-bs-dismiss="offcanvas"
+    ></button>
+
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column">
+
+    <form (ngSubmit)="registrar()" class="flex-grow-1 d-flex flex-column">
+
+      <div class="mb-3">
+        <label class="form-label small fw-semibold text-uppercase tracking">Nombres</label>
+        <div class="input-icon-wrapper">
+          <i class="bi bi-person input-icon"></i>
+          <input
+            type="text"
+            class="form-control login-input"
+            placeholder="Tu nombre"
+            [(ngModel)]="nombre"
+            name="nombre"
+          >
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label small fw-semibold text-uppercase tracking">Correo electrónico</label>
+        <div class="input-icon-wrapper">
+          <i class="bi bi-envelope input-icon"></i>
+          <input
+            type="email"
+            class="form-control login-input"
+            placeholder="tu@correo.com"
+            [(ngModel)]="correo"
+            name="correo"
+          >
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label small fw-semibold text-uppercase tracking">Contraseña</label>
+        <div class="input-icon-wrapper">
+          <i class="bi bi-lock input-icon"></i>
+          <input
+            type="password"
+            class="form-control login-input"
+            placeholder="Mínimo 6 caracteres"
+            [(ngModel)]="password"
+            name="password"
+          >
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-login w-100 py-3 fw-bold mt-2"
+        [disabled]="cargando"
+      >
+        <span *ngIf="!cargando">Crear Cuenta</span>
+        <span *ngIf="cargando">
+          <span class="spinner-border spinner-border-sm me-2"></span>
+          Registrando...
+        </span>
+      </button>
+
+    </form>
+
+    <div class="text-center mt-auto pt-4 border-top">
+      <p class="small text-muted mb-2">¿Ya tienes cuenta?</p>
+      <button
+        class="btn btn-outline-dark rounded-pill px-5 w-100"
+        (click)="switchToLogin()"
+      >
+        Iniciar sesión
+      </button>
+    </div>
+
+  </div>
+
+</div>

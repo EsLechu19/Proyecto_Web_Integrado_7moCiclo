@@ -1,0 +1,15 @@
+<app-toast></app-toast>
+
+<app-navbar *ngIf="!mostrarAdmin()"></app-navbar>
+
+<app-login></app-login>
+
+<app-register></app-register>
+
+<router-outlet></router-outlet>
+
+<app-footer *ngIf="
+    !router.url.includes('/admin')
+    &&
+    !router.url.includes('/cliente')
+  "></app-footer>

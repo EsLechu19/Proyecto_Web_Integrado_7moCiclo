@@ -1,0 +1,307 @@
+<div class="d-flex">
+
+  <app-sidebar></app-sidebar>
+
+  <div class="flex-grow-1 p-5">
+
+    <div class="mb-5">
+
+      <h1 class="fw-bold">
+        Panel Administrador
+      </h1>
+
+      <p class="text-muted">
+        Bienvenido administrador
+      </p>
+
+    </div>
+
+    <app-spinner *ngIf="cargando" texto="Cargando estadísticas..."></app-spinner>
+
+    <div class="row g-4" *ngIf="!cargando">
+
+      <div class="col-md-3">
+
+        <div class="card border-0 shadow-sm rounded-4 p-4 h-100 card-productos">
+
+          <div class="d-flex justify-content-between align-items-start">
+
+            <div>
+
+              <p class="text-uppercase small fw-semibold mb-1">
+                Productos
+              </p>
+
+              <h2 class="fw-bold mb-0 display-5">
+                {{ totalProductos }}
+              </h2>
+
+            </div>
+
+            <div class="icon-box">
+              <i class="bi bi-box-seam fs-3"></i>
+            </div>
+
+          </div>
+
+          <a routerLink="/admin/productosAdmin" class="mt-3 text-decoration-none small fw-medium">
+            Ver detalle &rarr;
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+
+        <div class="card border-0 shadow-sm rounded-4 p-4 h-100 card-pedidos">
+
+          <div class="d-flex justify-content-between align-items-start">
+
+            <div>
+
+              <p class="text-uppercase small fw-semibold mb-1">
+                Pedidos
+              </p>
+
+              <h2 class="fw-bold mb-0 display-5">
+                {{ totalPedidos }}
+              </h2>
+
+            </div>
+
+            <div class="icon-box">
+              <i class="bi bi-truck fs-3"></i>
+            </div>
+
+          </div>
+
+          <a routerLink="/admin/pedidos" class="mt-3 text-decoration-none small fw-medium">
+            Ver detalle &rarr;
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+
+        <div class="card border-0 shadow-sm rounded-4 p-4 h-100 card-usuarios">
+
+          <div class="d-flex justify-content-between align-items-start">
+
+            <div>
+
+              <p class="text-uppercase small fw-semibold mb-1">
+                Usuarios
+              </p>
+
+              <h2 class="fw-bold mb-0 display-5">
+                {{ totalUsuarios }}
+              </h2>
+
+            </div>
+
+            <div class="icon-box">
+              <i class="bi bi-people fs-3"></i>
+            </div>
+
+          </div>
+
+          <a routerLink="/admin/usuarios" class="mt-3 text-decoration-none small fw-medium">
+            Ver detalle &rarr;
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+
+        <div class="card border-0 shadow-sm rounded-4 p-4 h-100 card-categorias">
+
+          <div class="d-flex justify-content-between align-items-start">
+
+            <div>
+
+              <p class="text-uppercase small fw-semibold mb-1">
+                Categorías
+              </p>
+
+              <h2 class="fw-bold mb-0 display-5">
+                {{ totalCategorias }}
+              </h2>
+
+            </div>
+
+            <div class="icon-box">
+              <i class="bi bi-tags fs-3"></i>
+            </div>
+
+          </div>
+
+          <a routerLink="/admin/categorias" class="mt-3 text-decoration-none small fw-medium">
+            Ver detalle &rarr;
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row g-4 mt-2" *ngIf="!cargando">
+
+      <div class="col-lg-7">
+        <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="fw-bold mb-0">
+              <i class="bi bi-bar-chart me-2"></i>Productos por Categoría
+            </h5>
+          </div>
+          <div class="d-flex flex-column gap-3">
+            <div *ngFor="let item of productosPorCategoria" class="chart-bar-row">
+              <div class="d-flex justify-content-between small mb-1">
+                <span class="fw-semibold">{{ item.nombre }}</span>
+                <span class="fw-bold">{{ item.cantidad }}</span>
+              </div>
+              <div class="chart-bar-track">
+                <div
+                  class="chart-bar-fill"
+                  [style.width.%]="(item.cantidad / totalProductos) * 100"
+                  [style.background]="item.color"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+          <h5 class="fw-bold mb-4">
+            <i class="bi bi-pie-chart me-2"></i>Pedidos por Estado
+          </h5>
+          <div class="d-flex flex-column align-items-center">
+            <div class="donut-wrapper mb-4">
+              <div class="donut" [style.background]="'conic-gradient(' + donutGradient + ')'">
+                <div class="donut-hole">
+                  <span class="donut-total">{{ totalPedidos }}</span>
+                  <small class="donut-label">Total</small>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+              <div *ngFor="let p of pedidosPorEstado" class="d-flex align-items-center gap-2">
+                <span class="legend-dot" [style.background]="p.color"></span>
+                <small class="text-muted">{{ p.estado.replace('_', ' ') }}</small>
+                <small class="fw-bold">{{ p.cantidad }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row mt-4" *ngIf="!cargando && productosCriticos.length > 0">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-4 p-4 border-danger border-opacity-25">
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <div class="icon-box-critico">
+              <i class="bi bi-exclamation-triangle"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-0 text-danger">Productos Críticos</h5>
+              <small class="text-muted">{{ productosCriticos.length }} productos con stock por agotar</small>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-borderless align-middle mb-0">
+              <thead>
+                <tr class="text-muted small">
+                  <th>Producto</th>
+                  <th>Categoría</th>
+                  <th class="text-center">Stock Total</th>
+                  <th>Tallas Críticas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of productosCriticos">
+                  <td>
+                    <div class="d-flex align-items-center gap-3">
+                      <img [src]="p.imagenUrl" class="rounded-3" style="width: 40px; height: 40px; object-fit: cover;">
+                      <span class="fw-semibold">{{ p.nombre }}</span>
+                    </div>
+                  </td>
+                  <td class="text-muted">{{ p.categoria?.nombre }}</td>
+                  <td class="text-center">
+                    <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-1">
+                      {{ stockTotal(p) }}
+                    </span>
+                  </td>
+                  <td>
+                    <span
+                      *ngFor="let t of p.tallas"
+                      class="badge me-1 mb-1"
+                      [class.bg-danger]="t.stock < 5"
+                      [class.bg-opacity-10]="true"
+                      [class.text-danger]="t.stock < 5"
+                      [class.bg-secondary]="t.stock >= 5"
+                      [class.text-secondary]="t.stock >= 5"
+                    >
+                      {{ t.talla }}: {{ t.stock }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4" *ngIf="!cargando && productosTop.length > 0">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-4 p-4">
+          <h5 class="fw-bold mb-4">
+            <i class="bi bi-star me-2"></i>Top Productos
+          </h5>
+          <div class="table-responsive">
+            <table class="table table-borderless align-middle mb-0">
+              <thead>
+                <tr class="text-muted small">
+                  <th>#</th>
+                  <th>Producto</th>
+                  <th>Categoría</th>
+                  <th class="text-center">Stock</th>
+                  <th class="text-end">Precio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of productosTop; let i = index">
+                  <td class="fw-bold text-muted">{{ i + 1 }}</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-3">
+                      <img [src]="p.imagenUrl" class="rounded-3" style="width: 44px; height: 44px; object-fit: cover;">
+                      <span class="fw-semibold">{{ p.nombre }}</span>
+                    </div>
+                  </td>
+                  <td class="text-muted">{{ p.categoria?.nombre }}</td>
+                  <td class="text-center">
+                    <span class="badge" [class.bg-success]="stockTotal(p) > 0" [class.bg-danger]="stockTotal(p) <= 0">
+                      {{ stockTotal(p) }}
+                    </span>
+                  </td>
+                  <td class="text-end fw-bold">S/. {{ p.precio?.toFixed(2) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

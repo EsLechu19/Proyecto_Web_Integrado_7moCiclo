@@ -1,0 +1,152 @@
+<div class="d-flex">
+
+  <app-sidebar></app-sidebar>
+
+  <div class="flex-grow-1 p-5">
+
+    <div class="d-flex justify-content-between mb-4">
+
+      <h1 class="fw-bold">
+        Usuarios
+      </h1>
+
+    </div>
+
+    <div class="bg-white p-4 rounded-4 shadow-sm">
+
+      <table class="table align-middle">
+
+        <thead>
+
+          <tr>
+
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let usuario of usuarios">
+
+            <td>{{ usuario.idUsuario }}</td>
+
+            <td>{{ usuario.nombre }}</td>
+
+            <td>{{ usuario.correo }}</td>
+
+            <td class="d-flex gap-2">
+
+              <button
+                class="btn btn-warning btn-sm"
+                (click)="abrirModal(usuario)"
+              >
+                Editar
+              </button>
+
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="eliminar(usuario.idUsuario)"
+              >
+                Eliminar
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div
+  class="modal fade"
+  id="editarModal"
+  tabindex="-1"
+>
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h5 class="modal-title">
+          Editar Usuario
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="mb-3">
+
+          <label class="form-label">
+            Nombre
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="usuarioSeleccionado.nombre"
+          >
+
+        </div>
+
+        <div class="mb-3">
+
+          <label class="form-label">
+            Correo
+          </label>
+
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="usuarioSeleccionado.correo"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+
+        <button
+          class="btn btn-dark"
+          (click)="guardarCambios()"
+        >
+          Guardar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

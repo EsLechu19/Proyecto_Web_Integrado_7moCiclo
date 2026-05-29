@@ -1,0 +1,127 @@
+.talla-btn {
+  position: relative;
+  min-width: 60px;
+  transition: all 0.2s ease;
+}
+
+.talla-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.talla-btn:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.talla-agotada {
+  border: 1.5px dashed #e2e8f0 !important;
+  background: #f8fafc !important;
+  color: #cbd5e1 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.talla-agotada::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  width: 120%;
+  height: 1.5px;
+  background: #e2e8f0;
+  transform: rotate(-12deg);
+}
+
+.talla-x {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: #fff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+}
+
+.thumbnails-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.thumbnail-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.thumbnail-img:hover {
+  border-color: #0f172a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.thumbnail-img.active {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15,23,42,0.15);
+}
+
+@media (max-width: 767px) {
+  section.container {
+    padding-top: 1rem !important;
+  }
+
+  .display-6 {
+    font-size: 1.5rem;
+  }
+
+  .display-5 {
+    font-size: 1.8rem;
+  }
+
+  .img-fluid {
+    min-height: 250px !important;
+    max-height: 350px !important;
+  }
+
+  .sticky-top {
+    position: static !important;
+  }
+
+  .btn-lg {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  .thumbnail-img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .img-fluid {
+    min-height: 200px !important;
+    max-height: 260px !important;
+  }
+
+  .display-6 {
+    font-size: 1.3rem;
+  }
+
+  .display-5 {
+    font-size: 1.5rem;
+  }
+}
