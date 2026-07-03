@@ -168,207 +168,230 @@ INSERT INTO categorias (nombre, descripcion) VALUES
 ('Casacas',   'Casacas y chaquetas');
 
 -- =========================================================
--- INSERTAR PRODUCTOS
+-- INSERTAR PRODUCTOS (orden mezclado)
 -- =========================================================
 
 INSERT INTO productos (nombre, descripcion, precio, color, genero, imagenes, id_categoria) VALUES
-('Polo Oversize Negro',       'Polo oversize de algodón premium',                  59.90,  'Negro',  'HOMBRE', '["https://www.migamarra.pe/cdn/shop/files/skeep_fotos_tamano_app_2.058_423f0163-212b-4b50-a2fd-01243b6d5b49.jpg?v=1752437987&width=600"]', 1),
-('Polera Nike Sportswear',    'Polera deportiva Nike Club Fleece',                 99.90,  'Negro',  'HOMBRE', '["https://d3fvqmu2193zmz.cloudfront.net/items_2/uid_commerces.1/uid_items_2.2025050922092540744/1500x1500/682271AE19C92-Polera-Sportswear-Hombre-Club-Bb.webp"]', 3),
-('Zapatillas Urban Sport',    'Zapatillas modernas urbanas cuero sintético',      149.90,  'Blanco', 'UNISEX',  '["https://simple.ripley.com.pe/product/_next/image?url=https%3A%2F%2Frimage.ripley.com.pe%2Fhome.ripley%2FAttachment%2FMKP%2F1344%2FPMP20001278566%2Ffull_image-1.jpeg&w=640&q=100","https://simple.ripley.com.pe/product/_next/image?url=https%3A%2F%2Frimage.ripley.com.pe%2Fhome.ripley%2FAttachment%2FMKP%2F1344%2FPMP20001278566%2Ffull_image-2.jpeg&w=640&q=100","https://simple.ripley.com.pe/product/_next/image?url=https%3A%2F%2Frimage.ripley.com.pe%2Fhome.ripley%2FAttachment%2FMKP%2F1344%2FPMP20001278566%2Ffull_image-3.jpeg&w=640&q=100"]', 2),
-('Blusa Satinada Zara Mujer', 'Blusa satinada elegante manga larga',              129.90,  'Blanco', 'MUJER',  '["https://static.zara.net/assets/public/2283/f27e/e36e4802aa25/b8b6a913f9d2/07969952710-p/07969952710-p.jpg?ts=1776935548481&w=750"]', 1),
-('Nike Revolution 7 Mujer',   'Zapatillas running Nike mujer suela amortiguada',   259.90,  'Rosa',   'MUJER',  '["https://bboys.pe/cdn/shop/files/FB7689-600_0.jpg?v=1753373363","https://bboys.pe/cdn/shop/files/FB7689-600_1.jpg?v=1753373363","https://bboys.pe/cdn/shop/files/FB7689-600_2.jpg?v=1753373363"]', 2),
-('Jean Skinny Levis Mujer',   'Jean skinny tiro alto elástico',                   189.90,  'Azul',   'MUJER',  '["https://levisperu.vtexassets.com/arquivos/ids/553780-800-auto?v=638662847121000000&width=800&height=auto&aspect=true"]', 5),
-('Casaca Puma Hombre Ess',    'Casaca deportiva Puma Essential',                  219.90,  'Gris',   'HOMBRE', '["https://oechsle.vteximg.com.br/arquivos/ids/21112539-1000-1000/2885040.jpg?v=638824269939500000"]', 6),
-('Adidas Runfalcon 5 Hombre', 'Zapatillas running Adidas con mediasuela Cloudfoam',199.90,  'Negro',  'HOMBRE', '["https://assets.adidas.com/images/w_600,f_auto,q_auto/39016994181c4fc1a492629f9673e74a_faec/Zapatillas_de_Running_Runfalcon_5_Negro_IE8828_db01_standard.jpg","https://assets.adidas.com/images/w_600,f_auto,q_auto/39016994181c4fc1a492629f9673e74a_faec/Zapatillas_de_Running_Runfalcon_5_Negro_IE8828_db02_standard.jpg","https://assets.adidas.com/images/w_600,f_auto,q_auto/39016994181c4fc1a492629f9673e74a_faec/Zapatillas_de_Running_Runfalcon_5_Negro_IE8828_db03_standard.jpg"]', 2),
-('Gorra New Era NY Yankees',  'Gorra urbana unisex 9FIFTY snapback',                99.90,  'Negro',  'UNISEX',  '["https://dbz8g93w027an.cloudfront.net/245641-home_default/gorra-new-york-yankees-mlb-9fifty-black.jpg"]', 4),
-('Nike Sportswear Club','Polera Nike algodón premium fit urbano',359.00,'Negro','HOMBRE','["https://www.nike.com.pe/on/demandware.static/-/Sites-catalog-equinox/default/dwba18244e/images/hi-res/198486893633_1_20251219-mrtPeru.jpg"]', 3),
-('Adidas Essentials Hoodie',
- 'Polera con capucha Premium Essentials',
- 299.00,
- 'Negro',
- 'HOMBRE',
- '["https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/f32f2bca3f2c40e9acaaa5ee4847fe12_9366/Polera_con_capucha_Premium_Essentials_Negro_JC9572_21_model.jpg"]',
- 3),
-('Zara Satin Shirt Woman',
- 'Blusa satinada elegante manga larga Zara',
- 239,
- 'Vino',
- 'MUJER',
- '["https://static.zara.net/assets/public/ce26/a484/4c66424f8437/32906c614d8a/08741258681-p/08741258681-p.jpg?ts=1758883980386&w=750"]',
- 1),
-('Puma Essentials Track Jacket',
- 'Casaca deportiva Puma',
- 279.90,
- 'Gris',
- 'HOMBRE',
- '["https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/586696/01/mod01/fnd/VNM/fmt/png/Essentials-Track-Jacket-Men"]',
- 6),
-('Levis 501 Original Fit',
- 'Jean Levis 501 fit clásico denim premium',
- 229.90,
- 'Azul',
- 'HOMBRE',
- '["https://levisperu.vtexassets.com/arquivos/ids/415963-800-auto?v=638652048165570000&width=800&height=auto&aspect=true"]',
- 5),
-('New Era MLB Boston Red Sox',
- 'Gorra 59Fifty MLB Boston Red Sox State Stitch Navy',
- 229.90,
- 'Negro',
- 'UNISEX',
- '["https://dbz8g93w027an.cloudfront.net/247053-superlarge_default/Gorra-59Fifty-MLB-Boston-Red-Sox-State-Stitch-Navy.jpg"]',
- 4),
-('Converse Chuck Taylor All Star',
- 'Zapatillas Converse clásicas caña alta',
- 269.90,
- 'Negro',
- 'UNISEX',
- '["https://oechsle.vteximg.com.br/arquivos/ids/14038096-1000-1000/166939.jpg?v=638138120470500000","https://oechsle.vteximg.com.br/arquivos/ids/14038096-1000-1000/166939_2.jpg?v=638138120470500000","https://oechsle.vteximg.com.br/arquivos/ids/14038096-1000-1000/166939_3.jpg?v=638138120470500000","https://oechsle.vteximg.com.br/arquivos/ids/14038096-1000-1000/166939_4.jpg?v=638138120470500000"]',
- 2),
-('Under Armour Rival Fleece Hoodie',
- 'Polera Under Armour fleece deportiva',
- 239.90,
- 'Gris',
- 'HOMBRE',
- '["https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/D61910s.jpg?im=Resize,width=750"]',
- 3),
-('Nike Air Max Excee Mujer',
- 'Zapatillas Nike Air Max diseño moderno',
- 399.90,
- 'Blanco/Rosado',
- 'MUJER',
- '["https://plazavea.vteximg.com.br/arquivos/ids/30371578-1000-1000/imageUrl_1.jpg?v=638715691225700000","https://plazavea.vteximg.com.br/arquivos/ids/30371578-1000-1000/imageUrl_2.jpg?v=638715691225700000","https://plazavea.vteximg.com.br/arquivos/ids/30371578-1000-1000/imageUrl_3.jpg?v=638715691225700000"]',
- 2),
-('Converse x Hello Kitty And Friends',
- 'Converse x Hello Kitty And Friends Chuck Taylor All Star Cinnamoroll',
- 379.90,
- 'Celeste',
- 'Mujer',
- '["https://www.converse.com.pe/media/catalog/product/z/a/zapatilla-mujer-conversexsanriochucktaylorallstar-web20262026-a17698c-0_2_zp9onloyrml8vyuk.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=1000&width=1000&canvas=1000:1000"]',
- 2),
-('Zara Mom Fit Jeans',
- 'Jean mom fit tiro alto estilo urbano',
- 159.90,
- 'Celeste',
- 'MUJER',
- '["https://static.zara.net/assets/public/f502/5bf3/46fa47799f4c/34c40b4a59a9/08727947400-e1/08727947400-e1.jpg?ts=1774967840665&w=750"]',
- 5);
+('Polo Oversize Negro', 'Polo oversize de algodón premium', 59.90, 'Negro', 'HOMBRE', '["https://www.migamarra.pe/cdn/shop/files/skeep_fotos_tamano_app_2.058_423f0163-212b-4b50-a2fd-01243b6d5b49.jpg?v=1752437987&width=600"]', 1),
 
+('Nike Revolution 7 Mujer', 'Zapatillas running Nike mujer suela amortiguada', 259.90, 'Rosa', 'MUJER', '["https://bboys.pe/cdn/shop/files/FB7689-600_0.jpg?v=1753373363","https://bboys.pe/cdn/shop/files/FB7689-600_1.jpg?v=1753373363","https://bboys.pe/cdn/shop/files/FB7689-600_2.jpg?v=1753373363"]', 2),
+
+('Casaca Puma Hombre Ess', 'Casaca deportiva Puma Essential', 219.90, 'Gris', 'HOMBRE', '["https://oechsle.vteximg.com.br/arquivos/ids/21112539-1000-1000/2885040.jpg?v=638824269939500000"]', 6),
+
+('Nike Sportswear Essential', 'T-Shirts Manga Corta Urbano Mujer', 79.90, 'Negro', 'MUJER', '["https://www.nike.com.pe/dw/image/v2/BJKZ_PRD/on/demandware.static/-/Sites-catalog-equinox/default/dwde9a1c09/images/hi-res/191888970797_1_20230714120000-mrtPeru.jpeg?sw=800&sh=800","https://www.nike.com.pe/dw/image/v2/BJKZ_PRD/on/demandware.static/-/Sites-catalog-equinox/default/dwe3623a2f/images/hi-res/191888970797_2_20230714120000-mrtPeru.jpeg?sw=800&sh=800"]', 1),
+
+('Adidas Runfalcon 5 Hombre', 'Zapatillas running Adidas con mediasuela Cloudfoam', 199.90, 'Negro', 'HOMBRE', '["https://assets.adidas.com/images/w_600,f_auto,q_auto/39016994181c4fc1a492629f9673e74a_faec/Zapatillas_de_Running_Runfalcon_5_Negro_IE8828_db01_standard.jpg","https://triathlonperu.vtexassets.com/arquivos/ids/395739/IE8828_12.jpg?v=638554470674100000","https://passarelape.vtexassets.com/arquivos/ids/1545997/Zapatillas-Deportivas-Adidas-Hombres-Ie8812-Runfalcon-5-NEGRO-NEGRO-7.5-2.jpg?v=638760910579800000"]', 2),
+
+('Converse x Hello Kitty And Friends', 'Converse x Hello Kitty And Friends Chuck Taylor All Star Cinnamoroll', 379.90, 'Celeste', 'MUJER', '["https://www.converse.com.pe/media/catalog/product/z/a/zapatilla-mujer-conversexsanriochucktaylorallstar-web20262026-a17698c-0_2_zp9onloyrml8vyuk.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=1000&width=1000&canvas=1000:1000","https://f.fcdn.app/imgs/2bfd13/www.inbox.com.pe/inbope/999e/webp/catalogo/COA17698C_2763_3/1000x1000/zapatillas-converse-converse-x-hello-kitty-and-friends-chuck-taylor-all-star-cinnamoroll-unisex-sky-blue.jpg","https://f.fcdn.app/imgs/d714a9/www.inbox.com.pe/inbope/6c09/webp/catalogo/COA17698C_2763_2/1000x1000/zapatillas-converse-converse-x-hello-kitty-and-friends-chuck-taylor-all-star-cinnamoroll-unisex-sky-blue.jpg"]', 2),
+
+('Gorra New Era NY Yankees', 'Gorra urbana unisex 9FIFTY snapback', 99.90, 'Negro', 'UNISEX', '["https://dbz8g93w027an.cloudfront.net/245641-home_default/gorra-new-york-yankees-mlb-9fifty-black.jpg","https://rimage.ripley.com.pe/home.ripley/Attachment/MKP/3733/PMP00003586401/imagen4-2.jpeg"]', 4),
+
+('Nike Sportswear Phoenix Fleece', 'Polera con gorro oversized cropped Henley para mujer', 223.90, 'Azul', 'MUJER', '["https://www.nike.com.pe/on/demandware.static/-/Sites-catalog-equinox/default/dwbbb9fda5/images/hi-res/198488100241_1_20260202-mrtPeru.jpg","https://www.nike.com.pe/on/demandware.static/-/Sites-catalog-equinox/default/dwecc673a4/images/hi-res/198488100241_2_20260202-mrtPeru.jpg"]', 3),
+
+('Levis 501 Original Fit', 'Jean Levis 501 fit clásico denim premium', 229.90, 'Azul', 'HOMBRE', '["https://levisperu.vtexassets.com/arquivos/ids/415963-800-auto?v=638652048165570000&width=800&height=auto&aspect=true"]', 5),
+
+('GORRA NEW ERA PARA MUJER', 'ALGODÓN WMNS LEAGUE ESS NEYYAN', 119.90, 'Lavanda', 'MUJER', '["https://home.ripley.com.pe/Attachment/WOP_5/2015298964895/2015298964895_2.jpg","https://home.ripley.com.pe/Attachment/WOP_5/2015298964895/2015298964895-3.jpg"]', 4),
+
+('Polera Nike Sportswear', 'Polera deportiva Nike Club Fleece', 99.90, 'Negro', 'HOMBRE', '["https://d3fvqmu2193zmz.cloudfront.net/items_2/uid_commerces.1/uid_items_2.2025050922092540744/1500x1500/682271AE19C92-Polera-Sportswear-Hombre-Club-Bb.webp"]', 3),
+
+('Casaca acolchada con capucha', 'Casaca acolchada con capucha Essentials para mujer', 186.90, 'Negro', 'MUJER', '["https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/685231/01/mod01/fnd/EEA/fmt/png/Chaqueta-acolchada-con-capucha-Essentials-para-mujer","https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/685231/01/mod02/fnd/EEA/fmt/png/Chaqueta-acolchada-con-capucha-Essentials-para-mujer"]', 6),
+
+('Zapatillas Urban Sport', 'Zapatillas modernas urbanas cuero sintético', 149.90, 'Blanco', 'UNISEX', '["https://simple.ripley.com.pe/product/_next/image?url=https%3A%2F%2Frimage.ripley.com.pe%2Fhome.ripley%2FAttachment%2FMKP%2F1344%2FPMP20001278566%2Ffull_image-1.jpeg&w=640&q=100","https://d3fvqmu2193zmz.cloudfront.net/items_2/uid_commerces.1/uid_items_2.2025050714585430313/1500x1500/681BBD7C46B9B-Zapatillas-Urbanas-Hombre-Court-Classic-Clean.webp","https://d3fvqmu2193zmz.cloudfront.net/items_2/uid_commerces.1/uid_items_2.2025050714585430052/1500x1500/681BB1971ECF2-Zapatillas-Urbanas-Mujer-Court-Lally.webp"]', 2),
+
+('Polo deportivo Mujer PUMA', 'Polo deportivo Mujer PUMA ESS No. 1 Logo Tee', 59.90, 'Negro', 'MUJER', '["https://media.falabella.com/falabellaPE/20782856_1/w=1200,h=1200,fit=pad","https://media.falabella.com/falabellaPE/20782856_2/w=1200,h=1200,fit=pad"]', 1),
+
+('Nike Sportswear Club', 'Polera Nike algodón premium fit urbano', 359.00, 'Negro', 'HOMBRE', '["https://www.nike.com.pe/on/demandware.static/-/Sites-catalog-equinox/default/dwba18244e/images/hi-res/198486893633_1_20251219-mrtPeru.jpg","https://www.nike.com.pe/dw/image/v2/BJKZ_PRD/on/demandware.static/-/Sites-catalog-equinox/default/dwe598439b/images/hi-res/198486893633_4_20251219-mrtPeru.jpg?sw=800&sh=800","https://www.nike.com.pe/dw/image/v2/BJKZ_PRD/on/demandware.static/-/Sites-catalog-equinox/default/dw58d1c72d/images/hi-res/198486893633_5_20251219-mrtPeru.jpg?sw=800&sh=800"]', 3),
+
+('Zara Mom Fit Jeans', 'Jean mom fit tiro alto estilo urbano', 159.90, 'Celeste', 'MUJER', '["https://static.zara.net/assets/public/f502/5bf3/46fa47799f4c/34c40b4a59a9/08727947400-e1/08727947400-e1.jpg?ts=1774967840665&w=750"]', 5),
+
+('Adidas Essentials Hoodie', 'Polera con capucha Premium Essentials', 299.00, 'Negro', 'HOMBRE', '["https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/f32f2bca3f2c40e9acaaa5ee4847fe12_9366/Polera_con_capucha_Premium_Essentials_Negro_JC9572_21_model.jpg"]', 3),
+
+('POLERA MUJER PUMA', 'PUMA BETTER ESSENTIALS HOODIE FL ALGODÓN NEGRO', 199.90, 'Negro', 'MUJER', '["https://home.ripley.com.pe/Attachment/WOP_5/2020341903356/2020341903356_2.jpg","https://home.ripley.com.pe/Attachment/WOP_5/2020341903356/2020341903356-1.jpg"]', 3),
+
+('New Era MLB Boston Red Sox', 'Gorra 59Fifty MLB Boston Red Sox State Stitch Navy', 229.90, 'Negro', 'UNISEX', '["https://dbz8g93w027an.cloudfront.net/247053-superlarge_default/Gorra-59Fifty-MLB-Boston-Red-Sox-State-Stitch-Navy.jpg","https://dbz8g93w027an.cloudfront.net/247061-superlarge_default/Gorra-59Fifty-MLB-Boston-Red-Sox-State-Stitch-Navy.jpg"]', 4),
+
+('Nike Windrunner', 'Casaca de tejido Woven holgada de cierre completo con protección UV para mujer', 379.90, 'Azul Marino Militar/Blanco', 'MUJER', '["https://www.nike.com.pe/on/demandware.static/-/Sites-catalog-equinox/default/dw40805bdd/images/hi-res/197596543124_1_20240819-mrtPeru.jpg","https://www.nike.com.pe/on/demandware.static/-/Sites-catalog-equinox/default/dw6b780029/images/hi-res/197596543124_5_20240819-mrtPeru.jpg"]', 6),
+
+('Zara Satin Shirt Woman', 'Blusa satinada elegante manga larga Zara', 239.00, 'Vino', 'MUJER', '["https://static.zara.net/assets/public/ce26/a484/4c66424f8437/32906c614d8a/08741258681-p/08741258681-p.jpg?ts=1758883980386&w=750"]', 1),
+
+('Puma Essentials Track Jacket', 'Casaca deportiva Puma', 279.90, 'Gris', 'HOMBRE', '["https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/586696/01/mod01/fnd/VNM/fmt/png/Essentials-Track-Jacket-Men"]', 6),
+
+('Converse Chuck Taylor All Star', 'Zapatillas Converse clásicas caña alta', 269.90, 'Negro', 'UNISEX', '["https://oechsle.vteximg.com.br/arquivos/ids/14038096-1000-1000/166939.jpg?v=638138120470500000","https://oechsle.vteximg.com.br/arquivos/ids/14038098-1000-1000/166939_2.jpg?v=638138120395600000","https://oechsle.vteximg.com.br/arquivos/ids/14038097-1000-1000/166939_1.jpg?v=638138120468000000"]', 2),
+
+('Jean Skinny Levis Mujer', 'Jean skinny tiro alto elástico', 189.90, 'Azul', 'MUJER', '["https://levisperu.vtexassets.com/arquivos/ids/553780-800-auto?v=638662847121000000&width=800&height=auto&aspect=true"]', 5),
+
+('Under Armour Rival Fleece Hoodie', 'Polera Under Armour fleece deportiva', 239.90, 'Gris', 'HOMBRE', '["https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/D61910s.jpg?im=Resize,width=750"]', 3),
+
+('Nike Air Max Excee Mujer', 'Zapatillas Nike Air Max diseño moderno', 399.90, 'Blanco/Rosado', 'MUJER', '["https://plazavea.vteximg.com.br/arquivos/ids/30371578-1000-1000/imageUrl_1.jpg?v=638715691225700000","https://thn.pe/cdn/shop/files/CD5432-131_2.jpg?v=1732569096&width=713","https://thn.pe/cdn/shop/files/CD5432-131_3.jpg?v=1732569096&width=713"]', 2),
+
+('Gorra Los Angeles Lakers', 'Gorra Los Angeles Lakers NBA 59Fifty Black', 199.90, 'Negro', 'HOMBRE', '["https://dbz8g93w027an.cloudfront.net/244588-superlarge_default/Gorra-Los-Angeles-Lakers-NBA-59Fifty-Black.jpg","https://dbz8g93w027an.cloudfront.net/244592-superlarge_default/Gorra-Los-Angeles-Lakers-NBA-59Fifty-Black.jpg"]', 4),
+
+('Blusa Satinada Zara Mujer', 'Blusa satinada elegante manga larga', 129.90, 'Blanco', 'MUJER', '["https://static.zara.net/assets/public/2283/f27e/e36e4802aa25/b8b6a913f9d2/07969952710-p/07969952710-p.jpg?ts=1776935548481&w=750"]', 1),
+
+('Gorra Chicago Bulls', 'Gorra Chicago Bulls NBA 9Fifty Black', 179.90, 'Negro', 'HOMBRE', '["https://dbz8g93w027an.cloudfront.net/252515-superlarge_default/Gorra-Chicago-Bulls-NBA-9Fifty-Black.jpg","https://dbz8g93w027an.cloudfront.net/252548-large_default_2x/Gorra-Chicago-Bulls-NBA-9Fifty-Black.jpg"]', 4),
+
+('Polera con capucha ADIDAS', 'Polera con capucha Originals de básquet Unisex', 223.90, 'Negro', 'UNISEX', '["https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/16efeb32ed9e44dfb4393e4028887369_9366/Polera_con_capucha_Originals_de_basquet_Negro_JW8578_21_model.jpg","https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/22d170769b0b477fa49ad05b667f6ad9_9366/Polera_con_capucha_Originals_de_basquet_Negro_JW8578_23_hover_model.jpg"]', 3),
+
+('Casaca Chaleco Active Quilt', 'Casaca pensada para moverte con libertad y marcar tu propio ritmo. Funcional, cómoda y con actitud, ideal para elevar cualquier outfit', 207.90, 'Negro', 'HOMBRE', '["https://www.converse.com.pe/media/catalog/product/c/a/casaca-hombre-converse-chalecoactivequilthombre-web-cnvsu26mjack1-001_1_omulvujmx0pieugi.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=1000&width=1000&canvas=1000:1000","https://www.converse.com.pe/media/catalog/product/c/a/casaca-hombre-converse-chalecoactivequilthombre-web-cnvsu26mjack1-001_2_cxow4er70uj0k6vp.jpg"]', 6),
+
+('CASACA DEPORTIVA ', 'CASACA DEPORTIVA HOMBRE ADIDAS GH4602 GRIS', 129.90, 'Gris', 'HOMBRE', '["https://rimage.ripley.com.pe/home.ripley/Attachment/WOP/1/2020251275888/full_image-2020251275888.jpg","https://rimage.ripley.com.pe/home.ripley/Attachment/WOP/1/2020251275888/image2-2020251275888.jpg"]', 6);
 -- =========================================================
--- INSERTAR TALLAS POR PRODUCTO
+-- INSERTAR TALLAS POR PRODUCTO (IDs actualizados)
 -- =========================================================
 
 INSERT INTO producto_tallas (id_producto, talla, stock) VALUES
--- Polo Oversize Negro (id=1)
 (1, 'S',  10),
 (1, 'M',  18),
 (1, 'L',  15),
 (1, 'XL',  8),
--- Polera Nike (id=2)
-(2, 'S',   5),
-(2, 'M',   8),
-(2, 'L',   7),
-(2, 'XL',  4),
--- Zapatillas Urban (id=3)
-(3, '38',  6),
-(3, '40', 10),
-(3, '42', 12),
-(3, '44',  8),
--- Blusa Satinada (id=4)
-(4, 'S',   8),
-(4, 'M',  20),
-(4, 'L',  12),
--- Nike Revolution 7 (id=5)
-(5, '36',  4),
-(5, '38', 10),
+
+(2, '36',  4),
+(2, '38', 10),
+(2, '40',  8),
+
+(3, 'S',   4),
+(3, 'M',   7),
+(3, 'L',   5),
+
+(4, 'S',  15),
+(4, 'M',  25),
+(4, 'L',  20),
+(4, 'XL', 10),
+
+(5, '38',  5),
 (5, '40',  8),
--- Jean Skinny Levis (id=6)
-(6, '26',  8),
-(6, '28', 12),
-(6, '30', 15),
-(6, '32', 10),
-(6, '34',  6),
--- Casaca Puma (id=7)
-(7, 'S',   4),
-(7, 'M',   7),
-(7, 'L',   5),
--- Adidas Runfalcon 5 (id=8)
-(8, '38',  5),
-(8, '40',  8),
-(8, '42', 10),
-(8, '44',  6),
--- Gorra New Era (id=9)
-(9, 'STD', 14),
--- Nike Sportswear Club
-(10,'S',12),
-(10,'M',20),
-(10,'L',18),
-(10,'XL',10),
+(5, '42', 10),
+(5, '44',  6),
 
--- Adidas Essentials Hoodie
-(11,'S',8),
-(11,'M',14),
-(11,'L',12),
-(11,'XL',7),
+(6, '35',  4),
+(6, '36',  7),
+(6, '37',  9),
+(6, '38',  8),
+(6, '39',  5),
 
--- Zara Satin Shirt Woman
-(12,'XS',5),
-(12,'S',10),
-(12,'M',14),
-(12,'L',9),
+(7, 'STD', 14),
 
--- Puma Essentials Track Jacket
-(13,'S',7),
-(13,'M',11),
-(13,'L',9),
-(13,'XL',5),
+(8, 'S',   8),
+(8, 'M',  12),
+(8, 'L',  10),
+(8, 'XL',  5),
 
--- Levis 501 Original Fit
-(14,'28',8),
-(14,'30',14),
-(14,'32',12),
-(14,'34',8),
-(14,'36',4),
+(9, '28',  8),
+(9, '30', 14),
+(9, '32', 12),
+(9, '34',  8),
+(9, '36',  4),
 
--- New Era MLB Boston Red Sox
-(15,'7',4),
-(15,'7 1/4',6),
-(15,'7 1/2',5),
-(15,'7 3/4',3),
+(10, 'STD', 10),
 
--- Converse Chuck Taylor All Star
-(16,'38',6),
-(16,'39',8),
-(16,'40',12),
-(16,'41',10),
-(16,'42',8),
-(16,'43',5),
+(11, 'S',   5),
+(11, 'M',   8),
+(11, 'L',   7),
+(11, 'XL',  4),
 
--- Under Armour Rival Fleece Hoodie
-(17,'S',6),
-(17,'M',10),
-(17,'L',9),
-(17,'XL',5),
+(12, 'S',   7),
+(12, 'M',  12),
+(12, 'L',   9),
+(12, 'XL',  5),
 
--- Nike Air Max Excee Mujer
-(18,'35',3),
-(18,'36',6),
-(18,'37',9),
-(18,'38',8),
-(18,'39',5),
+(13, '38',  6),
+(13, '40', 10),
+(13, '42', 12),
+(13, '44',  8),
 
--- Converse x Hello Kitty And Friends
-(19,'35',4),
-(19,'36',7),
-(19,'37',9),
-(19,'38',8),
-(19,'39',5),
+(14, 'S',  12),
+(14, 'M',  20),
+(14, 'L',  15),
+(14, 'XL',  8),
 
--- Zara Mom Fit Jeans
-(20,'24',4),
-(20,'26',8),
-(20,'28',12),
-(20,'30',10),
-(20,'32',6);
+(15, 'S',  12),
+(15, 'M',  20),
+(15, 'L',  18),
+(15, 'XL', 10),
+
+(16, '24',  4),
+(16, '26',  8),
+(16, '28', 12),
+(16, '30', 10),
+(16, '32',  6),
+
+(17, 'S',   8),
+(17, 'M',  14),
+(17, 'L',  12),
+(17, 'XL',  7),
+
+(18, 'S',  10),
+(18, 'M',  15),
+(18, 'L',  12),
+(18, 'XL',  6),
+
+(19, '7',     4),
+(19, '7 1/4', 6),
+(19, '7 1/2', 5),
+(19, '7 3/4', 3),
+
+(20, 'S',   6),
+(20, 'M',  10),
+(20, 'L',   8),
+(20, 'XL',  4),
+
+(21, 'XS',  5),
+(21, 'S',  10),
+(21, 'M',  14),
+(21, 'L',   9),
+
+(22, 'S',   7),
+(22, 'M',  11),
+(22, 'L',   9),
+(22, 'XL',  5),
+
+(23, '38',  6),
+(23, '39',  8),
+(23, '40', 12),
+(23, '41', 10),
+(23, '42',  8),
+(23, '43',  5),
+
+(24, '26',  8),
+(24, '28', 12),
+(24, '30', 15),
+(24, '32', 10),
+(24, '34',  6),
+
+(25, 'S',   6),
+(25, 'M',  10),
+(25, 'L',   9),
+(25, 'XL',  5),
+
+(26, '35',  3),
+(26, '36',  6),
+(26, '37',  9),
+(26, '38',  8),
+(26, '39',  5),
+
+(27, '7',     5),
+(27, '7 1/4', 8),
+(27, '7 1/2', 6),
+(27, '7 3/4', 3),
+
+(28, 'S',   8),
+(28, 'M',  20),
+(28, 'L',  12),
+
+(29, 'STD', 12),
+
+(30, 'S',  12),
+(30, 'M',  18),
+(30, 'L',  14),
+(30, 'XL',  8),
+
+(31, 'S',   4),
+(31, 'M',   2),
+(31, 'L',   9),
+
+(32, 'S',   6),
+(32, 'M',   10),
+(32, 'L',   5);
 
 -- =========================================================
 -- INSERTAR USUARIOS
@@ -377,9 +400,9 @@ INSERT INTO producto_tallas (id_producto, talla, stock) VALUES
 
 INSERT INTO usuarios (correo, nombre, password, rol) VALUES
 ('admin@gmail.com',  'Administrador',     '$2a$10$twhW4PDY4wJppQHS03i59eJjZfGTSolBqq3vhrAp6UR3Whhh2Rg0W', 'ADMIN'),
-('esau@gmail.com','Esau Lechuga',      '$2a$10$nMJNBvojJz7vWtKmQzb0zuclzIM38NvxjZkARORAaQH4Y3fpKdrk.', 'CLIENTE'),
-('josue@gmail.com','Josue Olivera',      '$2a$10$nMJNBvojJz7vWtKmQzb0zuclzIM38NvxjZkARORAaQH4Y3fpKdrk.', 'CLIENTE'),
-('xd@gmail.com','Jose Lavado',      '$2a$10$nMJNBvojJz7vWtKmQzb0zuclzIM38NvxjZkARORAaQH4Y3fpKdrk.', 'CLIENTE'),
+('esau@gmail.com',   'Esau Lechuga',      '$2a$10$nMJNBvojJz7vWtKmQzb0zuclzIM38NvxjZkARORAaQH4Y3fpKdrk.', 'CLIENTE'),
+('josue@gmail.com',  'Josue Olivera',     '$2a$10$nMJNBvojJz7vWtKmQzb0zuclzIM38NvxjZkARORAaQH4Y3fpKdrk.', 'CLIENTE'),
+('xd@gmail.com',     'Jose Lavado',       '$2a$10$nMJNBvojJz7vWtKmQzb0zuclzIM38NvxjZkARORAaQH4Y3fpKdrk.', 'CLIENTE'),
 ('luis@gmail.com',   'Luis García Torres','$2a$10$FXGPgfgqIYcJWplZ/njWFOjpqJg9AKhjY25SoyEOohOVTq1T8tdWC', 'CLIENTE'),
 ('maria@gmail.com',  'María Fernández López','$2a$10$FXGPgfgqIYcJWplZ/njWFOjpqJg9AKhjY25SoyEOohOVTq1T8tdWC', 'CLIENTE');
 
@@ -388,62 +411,48 @@ INSERT INTO usuarios (correo, nombre, password, rol) VALUES
 -- =========================================================
 
 INSERT INTO carritos (id_usuario) VALUES
-(1),  -- Admin
-(2),  -- Cliente Demo
-(3),  -- Luis
-(4);  -- María
+(1), (2), (3), (4), (5), (6);
 
 -- =========================================================
--- INSERTAR DETALLE CARRITO (carrito demo con talla)
+-- INSERTAR DETALLE CARRITO (Admin: 1 Polo Oversize id=1 talla M)
 -- =========================================================
 
 INSERT INTO detalle_carrito (cantidad, subtotal, talla, id_carrito, id_producto) VALUES
-(1, 59.90,  'M', 1, 1);  -- Admin tiene 1 polo talla M en su carrito
+(1, 59.90, 'M', 1, 1);
 
 -- =========================================================
 -- INSERTAR PEDIDOS (historial de compras)
 -- =========================================================
 
 INSERT INTO pedidos (estado, total, id_usuario) VALUES
-('ENTREGADO', 119.80, 2),  -- Cliente Demo
-('ENTREGADO', 249.80, 3),  -- Luis
-('EN_PROCESO', 89.90, 4),  -- María
-('ENTREGADO', 159.90, 4),  -- María
-('ENTREGADO', 199.90, 3),  -- Luis (segundo pedido)
-('ENTREGADO', 519.80, 2);  -- Cliente Demo (segundo pedido)
+('ENTREGADO', 119.80, 2),
+('ENTREGADO', 249.80, 5),
+('EN_PROCESO', 189.90, 6),
+('ENTREGADO', 259.90, 6),
+('ENTREGADO', 199.90, 5),
+('ENTREGADO', 519.80, 2);
 
 -- =========================================================
--- INSERTAR DETALLE PEDIDOS (con talla)
+-- INSERTAR DETALLE PEDIDOS (IDs de productos actualizados)
 -- =========================================================
 
 INSERT INTO detalle_pedido (cantidad, precio_unitario, subtotal, talla, id_pedido, id_producto) VALUES
--- Pedido 1: Cliente Demo - 2 Polos talla M
-(2, 59.90,  119.80, 'M',  1, 1),
-
--- Pedido 2: Luis - 1 Zapatillas Urban talla 42 + 1 Polera Nike talla L
-(1, 149.90, 149.90, '42', 2, 3),
-(1, 99.90,   99.90, 'L',  2, 2),
-
--- Pedido 3: María - 1 Jean Levis talla 30
-(1, 89.90,   89.90, '30', 3, 6),
-
--- Pedido 4: María - 1 Nike Revolution 7 talla 38
-(1, 159.90, 159.90, '38', 4, 5),
-
--- Pedido 5: Luis - 1 Adidas Runfalcon 5 talla 42
-(1, 199.90, 199.90, '42', 5, 8),
-
--- Pedido 6: Cliente Demo - 1 Casaca Puma talla M + 1 Gorra New Era STD + 1 Blusa Satinada talla M
-(1, 219.90, 219.90, 'M',  6, 7),
-(1, 99.90,   99.90, 'STD',6, 9),
-(1, 129.90, 129.90, 'M',  6, 4),
-(1, 59.90,   59.90, 'XL', 6, 1),
-(1, 99.90,   99.90, 'L',  6, 2);
+(2, 59.90,  119.80, 'M',   1, 1),
+(1, 149.90, 149.90, '42',  2, 13),
+(1, 99.90,   99.90, 'L',   2, 11),
+(1, 189.90, 189.90, 'M',   3, 3),
+(1, 259.90, 259.90, '38',  4, 2),
+(1, 199.90, 199.90, '42',  5, 5),
+(1, 219.90, 219.90, 'M',   6, 3),
+(1, 99.90,   99.90, 'STD', 6, 7),
+(1, 129.90, 129.90, 'M',   6, 28),
+(1, 59.90,   59.90, 'XL',  6, 1),
+(1, 99.90,   99.90, 'L',   6, 11);
 
 -- =========================================================
 -- CONSULTAS DE VERIFICACION
 -- =========================================================
-use tienda_ropa_db;
+USE tienda_ropa_db;
 SELECT 'USUARIOS' AS ''; SELECT * FROM usuarios;
 SELECT 'CATEGORIAS' AS ''; SELECT * FROM categorias;
 SELECT 'PRODUCTOS' AS ''; SELECT * FROM productos;
@@ -452,3 +461,4 @@ SELECT 'CARRITOS' AS ''; SELECT * FROM carritos;
 SELECT 'DETALLE_CARRITO' AS ''; SELECT * FROM detalle_carrito;
 SELECT 'PEDIDOS' AS ''; SELECT * FROM pedidos;
 SELECT 'DETALLE_PEDIDO' AS ''; SELECT * FROM detalle_pedido;
+SELECT id_categoria, nombre FROM categorias;
