@@ -69,11 +69,12 @@ export class Productos implements OnInit {
       const genero = params['genero'] || '';
       const categoria = params['categoria'] || '';
       const busqueda = params['busqueda'] || '';
+      const pagina = parseInt(params['pagina'] || '1');
 
       this.filtroGenero = genero;
       this.filtroCategoria = categoria;
       this.busqueda = busqueda;
-      this.paginaActual = 1;
+      this.paginaActual = pagina;
       this.listarProductos();
     });
   }
@@ -112,6 +113,11 @@ export class Productos implements OnInit {
 
   cambiarPagina(pagina: number) {
     this.paginaActual = pagina;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { pagina },
+      queryParamsHandling: 'merge'
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

@@ -51,6 +51,7 @@
       <small class="text-danger" *ngIf="stockTotal(producto) <= 0">Sin stock</small>
       <a
         [routerLink]="['/productos', producto.idProducto]"
+        [queryParamsHandling]="'preserve'"
         class="btn btn-dark rounded-pill px-4 py-1 small fw-bold"
         [class.disabled]="stockTotal(producto) <= 0"
       >
