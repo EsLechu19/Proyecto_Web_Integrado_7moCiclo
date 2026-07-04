@@ -5,9 +5,8 @@ import {
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
-
+import { Title } from '@angular/platform-browser';
 import { Sidebar } from '../../shared/sidebar/sidebar';
 
 import { ProductoService } from '../../services/producto.service';
@@ -51,14 +50,14 @@ export class ProductosAdmin implements OnInit {
     private productoService: ProductoService,
     private categoriaService: CategoriaService,
     private toastService: ToastService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
-
+    this.title.setTitle('StyloStore | Admin - Productos');
     this.cargarProductos();
     this.cargarCategorias();
-
   }
 
   cargarCategorias() {

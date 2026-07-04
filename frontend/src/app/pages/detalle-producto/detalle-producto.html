@@ -98,10 +98,10 @@
             {{ tallaDisponible() ? 'Agregar al carrito' : 'Sin stock' }}
           </button>
 
-          <a routerLink="/productos" [queryParamsHandling]="'preserve'" class="btn btn-outline-dark btn-lg rounded-pill px-4">
+          <button (click)="volverAtras()" class="btn btn-outline-dark btn-lg rounded-pill px-4">
             <i class="bi bi-arrow-left me-1"></i>
             Seguir
-          </a>
+          </button>
         </div>
 
         <!-- STOCK INFO -->

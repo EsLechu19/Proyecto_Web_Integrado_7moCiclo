@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ChangeDetector
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 import { ProductoService } from '../../services/producto.service';
 import { ProductCard } from '../../shared/product-card/product-card';
@@ -33,7 +34,8 @@ export class Home implements OnInit, AfterViewInit {
 
   constructor(
     private productoService: ProductoService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private title: Title
   ) {}
 
   suscribirse() {
@@ -56,6 +58,7 @@ export class Home implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('StyloStore | Inicio');
     this.listarDestacados();
     this.listarMujer();
     this.listarHombre();

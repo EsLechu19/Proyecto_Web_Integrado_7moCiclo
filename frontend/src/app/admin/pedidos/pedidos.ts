@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
-
+import { Title } from '@angular/platform-browser';
 import { Sidebar } from '../../shared/sidebar/sidebar';
 import { PedidoService } from '../../services/pedido.service';
 import { ToastService } from '../../services/toast.service';
@@ -39,10 +37,12 @@ export class Pedidos implements OnInit {
 
   constructor(
     private pedidoService: PedidoService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('StyloStore | Admin - Pedidos');
     this.cargarPedidos();
   }
 

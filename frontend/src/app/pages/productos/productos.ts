@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { ProductoService } from '../../services/producto.service';
 import { CategoriaService } from '../../services/categoria.service';
@@ -57,7 +58,8 @@ export class Productos implements OnInit {
     private productoService: ProductoService,
     private categoriaService: CategoriaService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
@@ -75,6 +77,7 @@ export class Productos implements OnInit {
       this.filtroCategoria = categoria;
       this.busqueda = busqueda;
       this.paginaActual = pagina;
+      this.title.setTitle(`StyloStore | ${this.tituloCatalogo}`);
       this.listarProductos();
     });
   }

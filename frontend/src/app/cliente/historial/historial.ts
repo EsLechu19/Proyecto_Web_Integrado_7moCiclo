@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
-
+import { Title } from '@angular/platform-browser';
 import { PedidoService } from '../../services/pedido.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
@@ -41,10 +40,12 @@ export class Historial implements OnInit {
     private pedidoService: PedidoService,
     private authService: AuthService,
     private toastService: ToastService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('StyloStore | Historial de Pedidos');
     this.cargarHistorial();
   }
 
