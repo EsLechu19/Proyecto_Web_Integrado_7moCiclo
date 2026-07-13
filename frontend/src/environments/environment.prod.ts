@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://tienda-backend.onrender.com'
+  apiUrl: 'https://stylostore-api.onrender.com'
 };
