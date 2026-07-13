@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient } from '@angular/common/http';
-
 import { HttpHeaders } from '@angular/common/http';
-
 import { BehaviorSubject, Subject } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +11,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class CarritoService {
 
   private api =
-    'http://localhost:8080/api/carrito';
+    `${environment.apiUrl}/api/carrito`;
 
   private cantidadSource =
     new BehaviorSubject<number>(0);
