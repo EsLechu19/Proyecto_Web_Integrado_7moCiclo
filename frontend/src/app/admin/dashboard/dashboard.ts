@@ -1,9 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
-
 import { RouterLink } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
 import { Sidebar } from '../../shared/sidebar/sidebar';
 import { Spinner } from '../../shared/spinner/spinner';
 
@@ -44,10 +42,12 @@ export class Dashboard implements OnInit {
     private usuarioService: UsuarioService,
     private categoriaService: CategoriaService,
     private pedidoService: PedidoService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('StyloStore | Admin - Dashboard');
     this.cargarConteos();
   }
 

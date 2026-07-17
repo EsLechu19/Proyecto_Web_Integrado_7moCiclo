@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: tienda-backend
+    runtime: docker
+    dockerfilePath: backend/backend/Dockerfile
+    dockerContext: backend/backend
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: PORT
+        value: 8080
+
+  - type: static_site
+    name: tienda-frontend
+    buildCommand: cd frontend && npm install && npm run build -- --configuration=production
+    staticPublishPath: frontend/dist/frontend/browser

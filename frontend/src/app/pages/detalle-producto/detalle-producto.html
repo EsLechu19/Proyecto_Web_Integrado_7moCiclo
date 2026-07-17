@@ -2,7 +2,7 @@
 
   <app-spinner *ngIf="cargando" texto="Cargando producto..."></app-spinner>
 
-  <div class="row g-5" *ngIf="!cargando && producto">
+  <div class="row g-5 align-items-start" *ngIf="!cargando && producto">
 
     <div class="col-lg-7">
 
@@ -98,10 +98,10 @@
             {{ tallaDisponible() ? 'Agregar al carrito' : 'Sin stock' }}
           </button>
 
-          <a routerLink="/productos" class="btn btn-outline-dark btn-lg rounded-pill px-4">
+          <button (click)="volverAtras()" class="btn btn-outline-dark btn-lg rounded-pill px-4">
             <i class="bi bi-arrow-left me-1"></i>
             Seguir
-          </a>
+          </button>
         </div>
 
         <!-- STOCK INFO -->

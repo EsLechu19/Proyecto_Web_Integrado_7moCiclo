@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormsModule } from '@angular/forms';
-
+import { Title } from '@angular/platform-browser';
 import { UsuarioService } from '../../services/usuario.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
@@ -23,10 +22,12 @@ export class Perfil implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('StyloStore | Mi Perfil');
     const data = this.authService.obtenerUsuario();
     this.usuario.nombre = data.nombre || '';
     this.usuario.correo = data.correo || '';

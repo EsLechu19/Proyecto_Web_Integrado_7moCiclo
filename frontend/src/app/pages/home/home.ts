@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 import { ProductoService } from '../../services/producto.service';
 import { ProductCard } from '../../shared/product-card/product-card';
@@ -21,8 +22,9 @@ declare const bootstrap: any;
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
-export class Home implements OnInit, AfterViewInit {
+export class Home implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('heroCarousel', { static: true }) heroCarousel!: ElementRef;
+  @ViewChild('brandsTrack', { static: true }) brandsTrack!: ElementRef;
 
   productos: Producto[] = [];
   productosMujer: Producto[] = [];
@@ -33,7 +35,8 @@ export class Home implements OnInit, AfterViewInit {
 
   constructor(
     private productoService: ProductoService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private title: Title
   ) {}
 
   suscribirse() {
@@ -53,9 +56,46 @@ export class Home implements OnInit, AfterViewInit {
     if (el) {
       new bootstrap.Carousel(el, { interval: 2500, ride: 'carousel' });
     }
+    this.initBrandsMarquee();
+  }
+
+  private animFrameId: number = 0;
+
+  initBrandsMarquee() {
+    const track = this.brandsTrack?.nativeElement;
+    if (!track) return;
+
+    const original = Array.from(track.children);
+    original.forEach((child) => {
+      track.appendChild((child as HTMLElement).cloneNode(true));
+    });
+
+    const firstClone = track.children[original.length] as HTMLElement;
+    const setWidth = firstClone.offsetLeft;
+
+    let pos = 0;
+    const speed = 0.5;
+
+    const animate = () => {
+      pos -= speed;
+      if (pos <= -setWidth) {
+        pos += setWidth;
+      }
+      track.style.transform = `translateX(${pos}px)`;
+      this.animFrameId = requestAnimationFrame(animate);
+    };
+
+    this.animFrameId = requestAnimationFrame(animate);
+  }
+
+  ngOnDestroy(): void {
+    if (this.animFrameId) {
+      cancelAnimationFrame(this.animFrameId);
+    }
   }
 
   ngOnInit(): void {
+    this.title.setTitle('StyloStore | Inicio');
     this.listarDestacados();
     this.listarMujer();
     this.listarHombre();

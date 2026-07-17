@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
-
+import { Title } from '@angular/platform-browser';
 import { Sidebar } from '../../shared/sidebar/sidebar';
 
 import { UsuarioService } from '../../services/usuario.service';
@@ -25,9 +24,10 @@ export class Usuarios implements OnInit {
 
   usuarioSeleccionado: any = {};
 
-  constructor(private usuarioService: UsuarioService,private cdr: ChangeDetectorRef) {}
+  constructor(private usuarioService: UsuarioService,private cdr: ChangeDetectorRef, private title: Title) {}
 
   ngOnInit(): void {
+    this.title.setTitle('StyloStore | Admin - Usuarios');
     this.listarUsuarios();
   }
 

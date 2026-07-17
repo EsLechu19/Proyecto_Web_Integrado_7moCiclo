@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import { ProductoService } from '../../services/producto.service';
 import { CarritoService } from '../../services/carrito.service';
@@ -27,7 +29,9 @@ export class DetalleProducto implements OnInit {
     private productoService: ProductoService,
     private carritoService: CarritoService,
     private authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private location: Location,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +43,10 @@ export class DetalleProducto implements OnInit {
     });
   }
 
+  volverAtras() {
+    this.location.back();
+  }
+
   cargarProducto(id: number) {
     this.cargando = true;
     this.productoService.obtenerProducto(id).subscribe({
@@ -48,6 +56,7 @@ export class DetalleProducto implements OnInit {
         if (data.tallas && data.tallas.length > 0) {
           this.tallaSeleccionada = data.tallas[0].talla;
         }
+        this.title.setTitle(`StyloStore | ${data.nombre}`);
         this.cargando = false;
       },
       error: () => {

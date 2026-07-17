@@ -146,18 +146,7 @@
 .brands-track {
   display: flex;
   gap: 48px;
-  width: fit-content;
   align-items: center;
-  animation: brands-scroll 35s linear infinite;
-}
-
-.brands-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes brands-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 
 .brand-item {

@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-
 import { Injectable } from '@angular/core';
-
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
 
   private api =
-    'http://localhost:8080/api/auth';
+    `${environment.apiUrl}/api/auth`;
 
   // ESTADO REACTIVO LOGIN
 
@@ -108,7 +107,7 @@ export class AuthService {
 
     return this.http.post(
 
-      'http://localhost:8080/api/usuarios/registro',
+      `${environment.apiUrl}/api/usuarios/registro`,
 
       data
 

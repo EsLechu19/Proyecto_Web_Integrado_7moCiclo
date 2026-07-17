@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PedidoService {
 
-  private api = 'http://localhost:8080/api/pedidos';
+  private api = `${environment.apiUrl}/api/pedidos`;
 
   constructor(private http: HttpClient) {}
 
@@ -53,6 +53,13 @@ export class PedidoService {
     return this.http.put(
       `${this.api}/${idPedido}/estado?estado=${estado}`,
       {},
+      this.getHeaders()
+    );
+  }
+
+  obtenerHistorial(idPedido: number) {
+    return this.http.get(
+      `${this.api}/${idPedido}/historial`,
       this.getHeaders()
     );
   }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 
 export class UsuarioService {
 
-  private api = 'http://localhost:8080/api/usuarios';
+  private api = `${environment.apiUrl}/api/usuarios`;
 
   constructor(
     private http: HttpClient

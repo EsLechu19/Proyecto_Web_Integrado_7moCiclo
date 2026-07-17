@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { Subscription, distinctUntilChanged } from 'rxjs';
 
@@ -44,9 +44,11 @@ export class Carrito implements OnInit, OnDestroy {
     private toastService: ToastService,
     private cdr: ChangeDetectorRef,
     private router: Router,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('StyloStore | Carrito de Compras');
     this.obtenerCarrito();
     const codigoGuardado = localStorage.getItem('codigoDescuento');
     if (codigoGuardado) {
