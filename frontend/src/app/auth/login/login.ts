@@ -35,6 +35,14 @@ export class Login {
 
   cargando = false;
 
+  modoAdmin = false;
+
+  showPassword = false;
+
+  errorAdmin = false;
+
+  errorCliente = false;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -55,6 +63,16 @@ export class Login {
     }
   }
 
+  alternarModoAdmin() {
+    this.modoAdmin = !this.modoAdmin;
+    this.errorAdmin = false;
+    this.errorCliente = false;
+    this.correo = '';
+    this.password = '';
+    this.showPassword = false;
+    this.cargando = false;
+  }
+
   iniciarSesion() {
     if (!this.correo || !this.password) {
       this.toastService.warning('Completa todos los campos');
@@ -72,12 +90,15 @@ export class Login {
 
     this.authService.login(data).subscribe({
       next: (response: any) => {
-        console.log(response);
-        // GUARDAR SESIÓN
+        if (response.rol === 'ADMIN') {
+          this.cargando = false;
+          this.errorCliente = true;
+          this.authService.logout();
+          this.toastService.error('Eres administrador. Usa el login de administrador.');
+          return;
+        }
 
         this.authService.guardarSesion(response);
-
-        // CERRAR LOGIN SIDEBAR
 
         const sidebar = document.getElementById('loginSidebar');
 
@@ -87,8 +108,6 @@ export class Login {
 
           offcanvas.hide();
         }
-
-        // MIGRAR CARRITO TEMP (TOLERA FALLOS PARCIALES)
 
         const idUsuario = response.idUsuario;
 
@@ -142,22 +161,14 @@ export class Login {
           this.carritoService.actualizarCantidad(0);
         }
 
-        // LIMPIAR
-
         this.correo = '';
 
         this.password = '';
 
         this.cargando = false;
 
-        // ESPERAR A QUE CIERRE EL SIDEBAR
-
         setTimeout(() => {
-          if (response.rol === 'ADMIN') {
-            this.router.navigate(['/admin']);
-          } else {
-            this.router.navigate(['/home']);
-          }
+          this.router.navigate(['/home']);
         }, 300);
       },
 
@@ -168,5 +179,54 @@ export class Login {
       },
     });
     
+  }
+
+  iniciarSesionAdmin() {
+    if (!this.correo || !this.password) {
+      this.toastService.warning('Completa todos los campos');
+      return;
+    }
+
+    this.errorAdmin = false;
+    this.cargando = true;
+
+    const data = {
+      correo: this.correo,
+      password: this.password,
+    };
+
+    this.authService.login(data).subscribe({
+      next: (response: any) => {
+        this.cargando = false;
+
+        if (response.rol !== 'ADMIN') {
+          this.errorAdmin = true;
+          this.authService.logout();
+          this.toastService.error('No eres administrador');
+          return;
+        }
+
+        this.authService.guardarSesion(response);
+
+        const sidebar = document.getElementById('loginSidebar');
+        if (sidebar) {
+          const offcanvas =
+            bootstrap.Offcanvas.getInstance(sidebar) || new bootstrap.Offcanvas(sidebar);
+          offcanvas.hide();
+        }
+
+        this.correo = '';
+        this.password = '';
+        this.errorAdmin = false;
+
+        setTimeout(() => {
+          this.router.navigate(['/admin']);
+        }, 300);
+      },
+      error: () => {
+        this.cargando = false;
+        this.toastService.error('Correo o contraseña incorrectos');
+      },
+    });
   }
 }

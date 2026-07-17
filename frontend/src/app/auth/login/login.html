@@ -4,16 +4,18 @@
   id="loginSidebar"
 >
 
-  <div class="offcanvas-header login-header">
+  <div class="offcanvas-header login-header" [ngClass]="modoAdmin ? 'login-header-admin' : ''">
 
     <div>
       <div class="login-icon-circle">
-        <i class="bi bi-person-lock"></i>
+        <i class="bi" [ngClass]="modoAdmin ? 'bi-shield-lock' : 'bi-person-lock'"></i>
       </div>
       <h4 class="fw-bold mb-1 text-white">
-        Iniciar Sesión
+        {{ modoAdmin ? 'Acceso Administrador' : 'Iniciar Sesión' }}
       </h4>
-      <p class="text-white-50 small mb-0">Ingresa tus credenciales para continuar</p>
+      <p class="text-white-50 small mb-0">
+        {{ modoAdmin ? 'Solo usuarios con rol administrador' : 'Ingresa tus credenciales para continuar' }}
+      </p>
     </div>
 
     <button
@@ -26,7 +28,8 @@
 
   <div class="offcanvas-body d-flex flex-column">
 
-    <form (ngSubmit)="iniciarSesion()" class="flex-grow-1 d-flex flex-column">
+    <!-- ============ MODO NORMAL ============ -->
+    <form *ngIf="!modoAdmin" (ngSubmit)="iniciarSesion()" class="flex-grow-1 d-flex flex-column">
 
       <div class="mb-4">
         <label class="form-label small fw-semibold text-uppercase tracking">Correo electrónico</label>
@@ -47,12 +50,20 @@
         <div class="input-icon-wrapper">
           <i class="bi bi-lock input-icon"></i>
           <input
-            type="password"
-            class="form-control login-input"
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control login-input login-input-with-toggle"
             placeholder="••••••••"
             [(ngModel)]="password"
             name="password"
           >
+          <button
+            type="button"
+            class="btn btn-link password-toggle-btn"
+            (click)="showPassword = !showPassword"
+            tabindex="-1"
+          >
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </button>
         </div>
       </div>
 
@@ -68,9 +79,102 @@
         </span>
       </button>
 
+      <div *ngIf="errorCliente" class="admin-error mt-3">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        Eres administrador. Usa el login de administrador.
+      </div>
+
+      <div class="admin-divider my-4">
+        <span>o</span>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-admin-login w-100 py-3 fw-bold"
+        (click)="alternarModoAdmin()"
+      >
+        <i class="bi bi-shield-lock me-2"></i>
+        Iniciar sesión como administrador
+      </button>
+
     </form>
 
-    <div class="text-center mt-auto pt-4 border-top">
+    <!-- ============ MODO ADMIN ============ -->
+    <form *ngIf="modoAdmin" (ngSubmit)="iniciarSesionAdmin()" class="flex-grow-1 d-flex flex-column">
+
+      <div class="admin-alert mb-4">
+        <i class="bi bi-info-circle me-2"></i>
+        Este acceso es exclusivo para administradores del sistema.
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label small fw-semibold text-uppercase tracking">Correo electrónico</label>
+        <div class="input-icon-wrapper">
+          <i class="bi bi-envelope input-icon"></i>
+          <input
+            type="email"
+            class="form-control login-input"
+            placeholder="admin@correo.com"
+            [(ngModel)]="correo"
+            name="correo"
+          >
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label small fw-semibold text-uppercase tracking">Contraseña</label>
+        <div class="input-icon-wrapper">
+          <i class="bi bi-lock input-icon"></i>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control login-input login-input-with-toggle"
+            placeholder="••••••••"
+            [(ngModel)]="password"
+            name="password"
+          >
+          <button
+            type="button"
+            class="btn btn-link password-toggle-btn"
+            (click)="showPassword = !showPassword"
+            tabindex="-1"
+          >
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="errorAdmin" class="admin-error mb-3">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        No eres administrador. Este acceso está restringido.
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-admin-submit w-100 py-3 fw-bold mt-2"
+        [disabled]="cargando"
+      >
+        <span *ngIf="!cargando">
+          <i class="bi bi-shield-lock me-2"></i>
+          Ingresar como administrador
+        </span>
+        <span *ngIf="cargando">
+          <span class="spinner-border spinner-border-sm me-2"></span>
+          Verificando...
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-back-cliente w-100 mt-3"
+        (click)="alternarModoAdmin()"
+      >
+        <i class="bi bi-person me-2"></i>
+        Login Cliente
+      </button>
+
+    </form>
+
+    <div *ngIf="!modoAdmin" class="text-center mt-auto pt-4 border-top">
       <p class="small text-muted mb-2">¿No tienes cuenta?</p>
       <button
         class="btn btn-outline-dark rounded-pill px-5 w-100"
