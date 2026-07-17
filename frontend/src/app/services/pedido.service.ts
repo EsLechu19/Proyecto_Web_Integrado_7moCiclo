@@ -57,4 +57,11 @@ export class PedidoService {
     );
   }
 
+  obtenerHistorial(idPedido: number) {
+    return this.http.get(
+      `${this.api}/${idPedido}/historial`,
+      this.getHeaders()
+    );
+  }
+
 }

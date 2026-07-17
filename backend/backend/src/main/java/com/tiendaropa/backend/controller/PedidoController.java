@@ -2,6 +2,7 @@ package com.tiendaropa.backend.controller;
 
 import com.tiendaropa.backend.entity.DetallePedido;
 import com.tiendaropa.backend.entity.EstadoPedido;
+import com.tiendaropa.backend.entity.HistorialEstadoPedido;
 import com.tiendaropa.backend.entity.Pedido;
 import com.tiendaropa.backend.entity.Usuario;
 import com.tiendaropa.backend.exception.AccesoDenegadoException;
@@ -85,7 +86,22 @@ public class PedidoController {
             throw new AccesoDenegadoException("Solo administradores pueden cambiar el estado del pedido");
         }
 
-        return pedidoService.actualizarEstadoPedido(idPedido, estado);
+        String email = auth.getName();
+        Usuario usuario = usuarioRepository.findByCorreo(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        return pedidoService.actualizarEstadoPedido(idPedido, estado, usuario);
+    }
+
+    @GetMapping("/{idPedido}/historial")
+    public List<HistorialEstadoPedido> historialPedido(
+            @PathVariable Long idPedido,
+            Authentication auth) {
+
+        Pedido pedido = pedidoService.obtenerPedidoPorId(idPedido);
+        Long idUsuario = pedido.getUsuario().getIdUsuario();
+        verificarPropiedad(idUsuario, auth);
+        return pedidoService.obtenerHistorial(idPedido);
     }
 
     private void verificarPropiedad(Long idUsuario, Authentication auth) {

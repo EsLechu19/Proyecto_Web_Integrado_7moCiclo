@@ -20,6 +20,7 @@ public class PedidoService {
     private final UsuarioRepository usuarioRepository;
     private final ProductoRepository productoRepository;
     private final ProductoTallaRepository productoTallaRepository;
+    private final HistorialEstadoPedidoRepository historialEstadoPedidoRepository;
 
     public PedidoService(
             PedidoRepository pedidoRepository,
@@ -28,7 +29,8 @@ public class PedidoService {
             DetalleCarritoRepository detalleCarritoRepository,
             UsuarioRepository usuarioRepository,
             ProductoRepository productoRepository,
-            ProductoTallaRepository productoTallaRepository) {
+            ProductoTallaRepository productoTallaRepository,
+            HistorialEstadoPedidoRepository historialEstadoPedidoRepository) {
         this.pedidoRepository = pedidoRepository;
         this.detallePedidoRepository = detallePedidoRepository;
         this.carritoRepository = carritoRepository;
@@ -36,6 +38,7 @@ public class PedidoService {
         this.usuarioRepository = usuarioRepository;
         this.productoRepository = productoRepository;
         this.productoTallaRepository = productoTallaRepository;
+        this.historialEstadoPedidoRepository = historialEstadoPedidoRepository;
     }
 
     @Transactional
@@ -120,11 +123,20 @@ public class PedidoService {
     }
 
     @Transactional
-    public Pedido actualizarEstadoPedido(Long idPedido, EstadoPedido nuevoEstado) {
+    public Pedido actualizarEstadoPedido(Long idPedido, EstadoPedido nuevoEstado, Usuario usuario) {
         Pedido pedido = pedidoRepository.findById(idPedido)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrado"));
 
         EstadoPedido estadoAnterior = pedido.getEstado();
+
+        HistorialEstadoPedido historial = HistorialEstadoPedido.builder()
+                .pedido(pedido)
+                .estadoAnterior(estadoAnterior)
+                .estadoNuevo(nuevoEstado)
+                .fechaCambio(LocalDateTime.now())
+                .usuario(usuario)
+                .build();
+        historialEstadoPedidoRepository.save(historial);
 
         pedido.setEstado(nuevoEstado);
 
@@ -147,5 +159,9 @@ public class PedidoService {
         }
 
         return pedidoRepository.save(pedido);
+    }
+
+    public List<HistorialEstadoPedido> obtenerHistorial(Long idPedido) {
+        return historialEstadoPedidoRepository.findByPedidoIdPedidoOrderByFechaCambioDesc(idPedido);
     }
 }

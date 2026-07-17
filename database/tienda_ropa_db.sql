@@ -156,6 +156,41 @@ CREATE TABLE detalle_pedido (
 ) ENGINE=InnoDB;
 
 -- =========================================================
+-- TABLA HISTORIAL ESTADO PEDIDO (auditoría de cambios)
+-- =========================================================
+
+CREATE TABLE historial_estado_pedido (
+    id_historial BIGINT AUTO_INCREMENT PRIMARY KEY,
+    estado_anterior ENUM(
+        'PENDIENTE',
+        'EN_PROCESO',
+        'ENVIADO',
+        'ENTREGADO',
+        'CANCELADO'
+    ) NOT NULL,
+    estado_nuevo ENUM(
+        'PENDIENTE',
+        'EN_PROCESO',
+        'ENVIADO',
+        'ENTREGADO',
+        'CANCELADO'
+    ) NOT NULL,
+    fecha_cambio DATETIME DEFAULT CURRENT_TIMESTAMP,
+    id_pedido BIGINT NOT NULL,
+    id_usuario BIGINT NOT NULL,
+    CONSTRAINT FK_historial_pedido
+        FOREIGN KEY (id_pedido)
+        REFERENCES pedidos(id_pedido)
+        ON DELETE CASCADE,
+    CONSTRAINT FK_historial_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuarios(id_usuario)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE INDEX idx_historial_pedido ON historial_estado_pedido(id_pedido);
+
+-- =========================================================
 -- INSERTAR CATEGORIAS
 -- =========================================================
 

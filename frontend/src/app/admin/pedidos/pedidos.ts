@@ -31,6 +31,7 @@ export class Pedidos implements OnInit {
   pedidos: any[] = [];
   pedidoSeleccionado: any = null;
   detallePedido: any[] = [];
+  historialPedido: any[] = [];
   nuevoEstado: string = '';
   cargando = true;
   estados = ['PENDIENTE', 'EN_PROCESO', 'ENVIADO', 'ENTREGADO', 'CANCELADO'];
@@ -70,6 +71,15 @@ export class Pedidos implements OnInit {
       },
       error: () => {
         this.detallePedido = [];
+      }
+    });
+
+    this.pedidoService.obtenerHistorial(pedido.idPedido).subscribe({
+      next: (data: any) => {
+        this.historialPedido = data;
+      },
+      error: () => {
+        this.historialPedido = [];
       }
     });
 
